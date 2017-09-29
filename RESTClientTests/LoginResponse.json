@@ -1,0 +1,13 @@
+{
+    "updated" : null,
+    "__meta" : "{\"relationRemovalIds\":{},\"selectedProperties\":[\"__updated__meta\",\"password\",\"created\",\"name\",\"___class\",\"ownerId\",\"updated\",\"objectId\",\"email\",\"username\"],\"relatedObjects\":{}}",
+    "lastLogin" : 1506418710746,
+    "ownerId" : "BDB104CB-B991-9B9C-FF0A-3FFA6DF5F200",
+    "___class" : "Users",
+    "created" : 1506418200762,
+    "user-token" : "6799D8F5-71AC-9AFB-FF53-264CDBE95D00",
+    "objectId" : "BDB104CB-B991-9B9C-FF0A-3FFA6DF5F200",
+    "email" : "sdjkf@adfsdf.dfg",
+    "name" : null,
+    "username" : "Some user"
+}
