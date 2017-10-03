@@ -48,12 +48,7 @@ func prettyPrintData(data: Data) {
         return
     }
     
-    if let prettyJsonString = String(data: prettyDataObj, encoding: String.Encoding.utf8) {
-        print("Data:\n\(prettyJsonString)")
-    } else {
-        print("Cannot convert JSON.")
-        return
-    }
+    String(data: prettyDataObj, encoding: String.Encoding.utf8).map { print("Data:\($0)") }
 }
 
 
