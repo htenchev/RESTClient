@@ -27,6 +27,8 @@
 		AB3B27141F7D12EC0023E324 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27121F7D12EC0023E324 /* Utils.swift */; };
 		AB3B27161F7D1D9B0023E324 /* DataSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */; };
 		AB3B27171F7D1D9B0023E324 /* DataSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */; };
+		AB6EFA941F83D7BF00D326FB /* RequestValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */; };
+		AB6EFA951F83D7BF00D326FB /* RequestValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,7 @@
 		AB39401E1F7A5F2B00681911 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		AB3B27121F7D12EC0023E324 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSerialization.swift; sourceTree = "<group>"; };
+		AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestValidation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,7 @@
 				AB255A7B1F792FB1001F9425 /* Info.plist */,
 				AB255A8F1F793850001F9425 /* API.swift */,
 				AB255A951F793DBE001F9425 /* Request.swift */,
+				AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */,
 				AB39401B1F7A5E3E00681911 /* RESTManager.swift */,
 				AB39401E1F7A5F2B00681911 /* Model.swift */,
 				AB3B27121F7D12EC0023E324 /* Utils.swift */,
@@ -238,6 +242,7 @@
 				AB3B27131F7D12EC0023E324 /* Utils.swift in Sources */,
 				AB39401F1F7A5F2B00681911 /* Model.swift in Sources */,
 				AB255A961F793DBE001F9425 /* Request.swift in Sources */,
+				AB6EFA941F83D7BF00D326FB /* RequestValidation.swift in Sources */,
 				AB255A701F792FB1001F9425 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +257,7 @@
 				AB255A971F793DBE001F9425 /* Request.swift in Sources */,
 				AB255A851F792FB1001F9425 /* RESTClientTests.swift in Sources */,
 				AB3B27171F7D1D9B0023E324 /* DataSerialization.swift in Sources */,
+				AB6EFA951F83D7BF00D326FB /* RequestValidation.swift in Sources */,
 				AB3B27141F7D12EC0023E324 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,29 +11,8 @@ import Foundation
 class RESTManager {
     static let sharedInstance = RESTManager()
     
-    typealias AvatarCompletion = (UserAvatar?) -> Void
-    
-    func getLoggedUserAvatar(completion: @escaping AvatarCompletion) {
-        let getAvatar = API.getUserInfo(objectId: loggedInObjectId, accessToken: accessToken, params: [Constants.avatarURLKey])
-        
-        execute(requestable: getAvatar) { (error: String, jsonDict: JSONDictionary?) in
-            if (!error.isEmpty) {
-                completion(nil)
-                return
-            }
-            
-            guard let dict = jsonDict else {
-                completion(nil)
-                return
-            }
-            
-            let avatar = UserAvatar(with: dict)
-            completion(avatar)
-        }
-    }
-    
     func execute(requestable: API, completionHandler: @escaping CompletionHandler) {
-        let req = RESTRequest()
+/*        let req = RESTRequest()
         
         req.load(requestable: requestable, completion: {
             [weak self] (error: String, jsonDictionary: JSONDictionary?) in
@@ -57,6 +36,7 @@ class RESTManager {
             
             completionHandler("", dict)
         })
+ */
     }
     
     var accessToken: String = ""
