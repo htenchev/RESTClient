@@ -101,7 +101,6 @@ struct CoolRequest<ResourceType: ModelType> : APIRequest {
             if resourceTypeStr != NSStringFromClass(GetAvatarResult.self) {
                 onInputOutputTypesMismatch()
             }
-
         case .setUserAvatar:
             if resourceTypeStr != NSStringFromClass(SetAvatarResult.self) {
                 onInputOutputTypesMismatch()
@@ -111,5 +110,3 @@ struct CoolRequest<ResourceType: ModelType> : APIRequest {
         load(requestable: requestable, completion: completion)
     }
 }
-
-

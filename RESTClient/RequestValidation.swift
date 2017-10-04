@@ -9,7 +9,7 @@
 import Foundation
 
 enum RequestElement : String {
-    case username, password, email, accessToken, getUserInfoParams, setUserInfoParams, objectId
+    case username, password, email, accessToken, avatarURL, objectId
 }
 
 protocol RequestInputValidation {
@@ -58,7 +58,7 @@ extension API : RequestInputValidation {
             return validateUsername
         case .accessToken, .objectId:
             return validateAny
-        case .setUserInfoParams, .getUserInfoParams:
+        case .avatarURL, .getUserInfoParams:
             return validateUserInfoParam
         }
     }

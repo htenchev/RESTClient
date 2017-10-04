@@ -19,15 +19,56 @@ class RequestDataTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
-    func testLoginData() {
-        let requestable = API.login(email: "", password: "sdfsdf")
-        
-        for (requestElement, success) in requestable.validate() {
-            XCTAssert(success, "\(requestElement) is bad.")
+    
+    func testAPIOperationData(_ operation: API, _ desiredFailures: [RequestElement]) {
+        for (requestElement, success) in operation.validate() {
+            var shouldSucceed = true
+            if (desiredFailures.contains(requestElement)) {
+                shouldSucceed = false
+            }
+            
+            XCTAssert(success == shouldSucceed, "\(requestElement) is bad.")
         }
+    }
+    
+    func testLoginData() {
+        testAPIOperationData(API.login(email: "", password: "sdfsdf23r23r"), [RequestElement.email])
+        testAPIOperationData(API.login(email: "sdfsdf", password: ""), [RequestElement.password, RequestElement.email])
+        testAPIOperationData(API.login(email: "sdfsdf@mail.bg", password: ""), [RequestElement.password])
+        testAPIOperationData(API.login(email: "sdfsdf@mail.bg", password: "sdfhusdfy98sdf"), [])
+    }
+    
+    func testRegistrationData() {
+        testAPIOperationData(API.register(email: "", password: "sdfsdf23r23r", username: "Ivan"), [RequestElement.email])
+        testAPIOperationData(API.register(email: "sdfsdf", password: "", username: "Ivan"), [RequestElement.password, RequestElement.email])
+        testAPIOperationData(API.register(email: "sdfsdf@mail.bg", password: "", username: "Ivan"), [RequestElement.password])
+        testAPIOperationData(API.register(email: "sdfsdf@mail.bg", password: "sdfhusdfy98sdf", username: "Ivan"), [])
+        testAPIOperationData(API.register(email: "sdfsdf@mail.bg", password: "sdfhusdfy98sdf", username: ""), [])
+    }
+    
+    func testLogoutData() {
+        testAPIOperationData(API.logout(accessToken: ""), [RequestElement.accessToken])
+        testAPIOperationData(API.logout(accessToken: "sdfsdjfkhsdfsiyudfysdjkhf-8sf76s87df-egfe-sdfe4f"), [RequestElement.accessToken])
+    }
+    
+    func testGetAvatarData() {
+        let goodToken = "sdfsdjfkhsdfsiyudfysdjkhf-8sf76s87df-egfe-sdfe4f"
+        let badToken = ""
         
-        
+        testAPIOperationData(API.getUserAvatar(objectId: "", accessToken: badToken), [RequestElement.objectId, RequestElement.accessToken])
+        testAPIOperationData(API.getUserAvatar(objectId: "fsdf98s0d9f8sdf", accessToken: goodToken), [])
+    }
+    
+    func testSetAvatarData() {
+        let goodToken = "sdfsdjfkhsdfsiyudfysdjkhf-8sf76s87df-egfe-sdfe4f"
+        let badToken = ""
+        let badUrl = "sjdfksjdkf"
+        let goodUrl = "https://mydomain.bg/28934.jpg"
+        let goodObjectId = "290348fijsfsdf90sdf"
+
+        testAPIOperationData(API.setUserAvatar(objectId: "", accessToken: badToken, url: badUrl), [.objectId, .accessToken, .avatarURL])
+        testAPIOperationData(API.setUserAvatar(objectId: "", accessToken: goodToken, url: goodUrl), [.objectId])
+        testAPIOperationData(API.setUserAvatar(objectId: goodObjectId, accessToken: goodToken, url: goodUrl), [])
     }
     
     func testPerformanceExample() {
