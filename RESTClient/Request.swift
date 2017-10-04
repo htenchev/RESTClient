@@ -67,46 +67,28 @@ extension APIRequest {
 }
 
 struct CoolRequest<ResourceType: ModelType> : APIRequest {
+    var requestable: Requestable
+    
+    init(requestable: Requestable) {
+        self.requestable = requestable
+    }
+    
+    func isInputConsistentWithOutput() -> Bool {
+        guard let resourceClass = ResourceType.self as? AnyClass else {
+            return false
+        }
+        
+        return requestable.resultType == NSStringFromClass(resourceClass)
+    }
+    
     func modelFromData(data: Data) -> ResourceType? {
+        // TODO: conversion
         return ResourceType.create(jsonDict: JSONDictionary()) as? ResourceType
     }
     
-    func execute(requestable: Requestable, completion: @escaping (String, ResourceType?) -> Void) {
-        guard let operation = requestable as? API else {
-            completion("Bad requestable", nil)
-            return
-        }
-        
-        let resourceTypeStr = NSStringFromClass((ResourceType.self as? AnyClass)!)
-        
-        func onInputOutputTypesMismatch() {
-            assert(false)
-            completion("onInputOutputTypesMismatch", nil)
-        }
-
-        switch operation {
-        case .login:
-            if resourceTypeStr != NSStringFromClass(LoginResult.self) {
-                onInputOutputTypesMismatch()
-            }
-        case .register:
-            if resourceTypeStr != NSStringFromClass(RegistrationResult.self) {
-                onInputOutputTypesMismatch()
-            }
-        case .logout:
-            if resourceTypeStr != NSStringFromClass(LogoutResult.self) {
-                onInputOutputTypesMismatch()
-            }
-        case .getUserAvatar:
-            if resourceTypeStr != NSStringFromClass(GetAvatarResult.self) {
-                onInputOutputTypesMismatch()
-            }
-        case .setUserAvatar:
-            if resourceTypeStr != NSStringFromClass(SetAvatarResult.self) {
-                onInputOutputTypesMismatch()
-            }
-        }
-        
-        load(requestable: requestable, completion: completion)
+    fileprivate func execute(completion: @escaping (String, ResourceType?) -> Void) {
+        load(requestable: self.requestable, completion: completion)
     }
 }
+
+

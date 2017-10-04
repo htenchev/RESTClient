@@ -18,9 +18,24 @@ enum API {
 
 protocol Requestable {
     var urlRequest: URLRequest? { get }
+    var resultType: String { get }
 }
 
 extension API : Requestable {
+    var resultType: String {
+        var result = ""
+        
+        switch self {
+        case .login: result = NSStringFromClass(LoginResult.self)
+        case .register: result = NSStringFromClass(RegistrationResult.self)
+        case .logout: result = NSStringFromClass(LogoutResult.self)
+        case .setUserAvatar: result = NSStringFromClass(SetAvatarResult.self)
+        case .getUserAvatar: result = NSStringFromClass(GetAvatarResult.self)
+        }
+        
+        return result
+    }
+    
     var urlRequest: URLRequest? {
         let urlString = Constants.baseUrl + path;
         

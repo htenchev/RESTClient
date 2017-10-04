@@ -58,7 +58,7 @@ extension API : RequestInputValidation {
             return validateUsername
         case .accessToken, .objectId:
             return validateAny
-        case .avatarURL, .getUserInfoParams:
+        case .avatarURL:
             return validateUserInfoParam
         }
     }
