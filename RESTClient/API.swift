@@ -9,14 +9,11 @@
 import Foundation
 
 enum API {
-    typealias GetUserInfoParams = [String]
-    typealias SetUserInfoParams = [String: String]
-    
     case login(email: String, password: String)
     case register(email: String, password: String, username: String)
     case logout(accessToken: String)
-    case getUserInfo(objectId: String, accessToken: String, params: GetUserInfoParams)
-    case setUserInfo(objectId: String, accessToken: String, info: SetUserInfoParams)
+    case getUserAvatar(objectId: String, accessToken: String)
+    case setUserAvatar(objectId: String, accessToken: String, url: String)
 }
 
 protocol Requestable {
@@ -59,10 +56,12 @@ extension API : Requestable {
             return Constants.registerPath
         case .logout:
             return Constants.logoutPath
-        case .setUserInfo(let objectId, _, _):
+        case .setUserAvatar(let objectId, _, _):
             return String(format: Constants.setUserInfoPath, objectId)
-        case .getUserInfo(let objectId, _, let info):
+        case .getUserAvatar(let objectId, _):
+            let info = [Constants.avatarURLKey, Constants.avatarRotationKey]
             let paramsString: String = "?props=" + info.joined(separator: ",")
+            
             return String(format: Constants.getUserInfoPath + paramsString, objectId)
         }
     }
@@ -80,8 +79,8 @@ extension API : Requestable {
             result![Constants.passwordKey] = password
             result![Constants.usernameKey] = username
             
-        case let .setUserInfo(_, _, info):
-            result = info
+        case let .setUserAvatar(_, _, avatarUrl):
+            result![Constants.avatarURLKey] = avatarUrl
             
         default:
             result = nil
@@ -95,9 +94,9 @@ extension API : Requestable {
         
         switch self {
         case .logout(let accessToken),
-             .setUserInfo(_, let accessToken, _):
+             .setUserAvatar(_, let accessToken, _):
             headers[Constants.accessTokenKey] = accessToken
-        case .getUserInfo(_, _, _):
+        case .getUserAvatar(_, _):
             return nil
             
         default:
@@ -111,7 +110,7 @@ extension API : Requestable {
         switch self {
         case .login, .register:
             return "POST"
-        case .setUserInfo:
+        case .setUserAvatar:
             return "PUT"
             
         default:

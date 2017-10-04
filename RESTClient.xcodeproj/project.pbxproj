@@ -25,6 +25,7 @@
 		AB3B27141F7D12EC0023E324 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27121F7D12EC0023E324 /* Utils.swift */; };
 		AB3B27161F7D1D9B0023E324 /* DataSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */; };
 		AB3B27171F7D1D9B0023E324 /* DataSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */; };
+		AB3C9F1D1F84F30000981A6C /* RequestDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C9F1C1F84F30000981A6C /* RequestDataTests.swift */; };
 		AB6EFA941F83D7BF00D326FB /* RequestValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */; };
 		AB6EFA951F83D7BF00D326FB /* RequestValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		AB39401E1F7A5F2B00681911 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		AB3B27121F7D12EC0023E324 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSerialization.swift; sourceTree = "<group>"; };
+		AB3C9F1C1F84F30000981A6C /* RequestDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataTests.swift; sourceTree = "<group>"; };
 		AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestValidation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				AB255A841F792FB1001F9425 /* RESTClientTests.swift */,
+				AB3C9F1C1F84F30000981A6C /* RequestDataTests.swift */,
 				AB255A861F792FB1001F9425 /* Info.plist */,
 				AB3940171F7A563900681911 /* RegistrationResponse.json */,
 				AB3940191F7A566200681911 /* LoginResponse.json */,
@@ -253,6 +256,7 @@
 				AB3B27171F7D1D9B0023E324 /* DataSerialization.swift in Sources */,
 				AB6EFA951F83D7BF00D326FB /* RequestValidation.swift in Sources */,
 				AB3B27141F7D12EC0023E324 /* Utils.swift in Sources */,
+				AB3C9F1D1F84F30000981A6C /* RequestDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

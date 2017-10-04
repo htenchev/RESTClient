@@ -97,12 +97,12 @@ struct CoolRequest<ResourceType: ModelType> : APIRequest {
             if resourceTypeStr != NSStringFromClass(LogoutResult.self) {
                 onInputOutputTypesMismatch()
             }
-        case .getUserInfo:
+        case .getUserAvatar:
             if resourceTypeStr != NSStringFromClass(GetAvatarResult.self) {
                 onInputOutputTypesMismatch()
             }
 
-        case .setUserInfo:
+        case .setUserAvatar:
             if resourceTypeStr != NSStringFromClass(SetAvatarResult.self) {
                 onInputOutputTypesMismatch()
             }
@@ -111,3 +111,5 @@ struct CoolRequest<ResourceType: ModelType> : APIRequest {
         load(requestable: requestable, completion: completion)
     }
 }
+
+

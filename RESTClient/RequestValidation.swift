@@ -14,13 +14,13 @@ enum RequestElement : String {
 
 protocol RequestInputValidation {
     typealias InputValidationResult = [RequestElement: Bool]
-    func isValid() -> InputValidationResult
+    func validate() -> InputValidationResult
 }
 
 extension API : RequestInputValidation {
     typealias ElementValidator = (String) -> Bool
     
-    func isValid() -> InputValidationResult {
+    func validate() -> InputValidationResult {
         var result: InputValidationResult = [:];
         
         switch self {
@@ -33,11 +33,11 @@ extension API : RequestInputValidation {
             result[.email] = validatorFor(element: .email)(email)
             result[.password] = validatorFor(element: .password)(password)
             
-        case let .setUserInfo(objectId, token, _): // TODO: params validation
+        case let .setUserAvatar(objectId, token, _): // TODO: params validation
             result[RequestElement.accessToken] = validatorFor(element: .accessToken)(token)
             result[.objectId] = validatorFor(element: .objectId)(objectId)
             
-        case let .getUserInfo(objectId, token, _): // TODO params validation
+        case let .getUserAvatar(objectId, token): // TODO params validation
             result[RequestElement.accessToken] = validatorFor(element: .accessToken)(token)
             result[.objectId] = validatorFor(element: .objectId)(objectId)
             

@@ -36,14 +36,13 @@ class RESTClientTests: XCTestCase {
             XCTAssertEqual(method, httpMethod)
         }
         
-        if let payload = request.httpBody, let myPayload = myRequest.httpBody, let correctPayloadJSON = body {
-            guard let myPayloadData = try? JSONSerialization.data(withJSONObject: myPayload, options: []),
+        if let payload = request.httpBody, let correctPayloadJSON = body {
+            guard let myPayloadData = try? JSONSerialization.data(withJSONObject: payload, options: []),
             let correctPayloadData = try? JSONSerialization.data(withJSONObject: correctPayloadJSON, options: []) else {
                 XCTAssert(false)
                 return
             }
             
-            XCTAssertEqual(payload, myPayloadData)
             XCTAssertEqual(myPayloadData, correctPayloadData)
             
             if let token = correctPayloadJSON[Constants.accessTokenKey] {
