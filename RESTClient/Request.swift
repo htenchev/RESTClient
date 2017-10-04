@@ -14,7 +14,7 @@ protocol APIRequest {
     associatedtype Model
     
     func load(requestable: Requestable, completion: @escaping (String, Model?) -> Void)
-    func modelFromData(data: Data) -> Model?
+    static func modelFromData(data: Data) -> Model?
 }
 
 extension APIRequest {
@@ -59,7 +59,7 @@ extension APIRequest {
                 completion("", nil)
             }
             
-            completion("", self.modelFromData(data: mydata))
+            completion("", Self.modelFromData(data: mydata))
         })
         
         task.resume()
@@ -81,12 +81,18 @@ struct CoolRequest<ResourceType: ModelType> : APIRequest {
         return requestable.resultType == NSStringFromClass(resourceClass)
     }
     
-    func modelFromData(data: Data) -> ResourceType? {
+    static func modelFromData(data: Data) -> ResourceType? {
         // TODO: conversion
         return ResourceType.create(jsonDict: JSONDictionary()) as? ResourceType
     }
     
     fileprivate func execute(completion: @escaping (String, ResourceType?) -> Void) {
+        if !isInputConsistentWithOutput() {
+            assert(false)
+            completion("Input inconsistent with output.", nil)
+            return
+        }
+        
         load(requestable: self.requestable, completion: completion)
     }
 }
