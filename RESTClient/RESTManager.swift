@@ -11,8 +11,12 @@ import Foundation
 class RESTManager {
     static let sharedInstance = RESTManager()
     
+    func execute(requestable: API, completion: @escaping (ConvertedType?) -> Void) {
+        
+    }
+    
     func execute(requestable: API, completionHandler: @escaping CompletionHandler) {
-/*        let req = RESTRequest()
+        let req = CoolRequest
         
         req.load(requestable: requestable, completion: {
             [weak self] (error: String, jsonDictionary: JSONDictionary?) in
@@ -36,7 +40,7 @@ class RESTManager {
             
             completionHandler("", dict)
         })
- */
+ 
     }
     
     var accessToken: String = ""

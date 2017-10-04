@@ -25,11 +25,10 @@ struct UserAvatar {
 
 protocol ModelType {
     associatedtype ConvertedType
-    
     static func create(jsonDict: JSONDictionary) -> ConvertedType;
 }
 
-struct LoginResult : ModelType {
+class LoginResult : ModelType {
     var userToken: String = ""
     
     init(jsonDict: JSONDictionary) {
@@ -41,7 +40,7 @@ struct LoginResult : ModelType {
     }
 }
 
-struct RegistrationResult : ModelType {
+class RegistrationResult : ModelType {
     init(jsonDict: JSONDictionary) {
         
     }
@@ -51,7 +50,7 @@ struct RegistrationResult : ModelType {
     }
 }
 
-struct LogoutResult : ModelType {
+class LogoutResult : ModelType {
     init(jsonDict: JSONDictionary) {
         
     }
@@ -61,7 +60,7 @@ struct LogoutResult : ModelType {
     }
 }
 
-struct SetAvatarResult : ModelType {
+class SetAvatarResult : ModelType {
     init(jsonDict: JSONDictionary) {
         
     }
@@ -71,19 +70,13 @@ struct SetAvatarResult : ModelType {
     }
 }
 
-struct GetAvatarResult : ModelType {
+class GetAvatarResult : ModelType {
     init(jsonDict: JSONDictionary) {
         
     }
     
     static func create(jsonDict: JSONDictionary) -> GetAvatarResult {
         return GetAvatarResult(jsonDict: jsonDict)
-    }
-}
-
-struct CoolRequest<ResourceType: ModelType> : APIRequest {
-    func modelFromData(data: Data) -> ResourceType? {
-        return ResourceType.create(jsonDict: JSONDictionary()) as? ResourceType
     }
 }
 

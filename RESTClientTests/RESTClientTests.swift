@@ -116,74 +116,12 @@ class RESTClientTests: XCTestCase {
         testAPIRequestTransform(myRequest: logout, httpMethod: "GET", headers: headers, body: nil)
     }
     
-    func testLogout(asyncExpectation: XCTestExpectation) {
-        let rest = RESTManager.sharedInstance
-        let logout = API.logout(accessToken: rest.accessToken)
-        
-        rest.execute(requestable: logout) { (error, data) in
-            if (!error.isEmpty) {
-                print("Error: \(error)")
-                XCTAssert(false)
-                asyncExpectation.fulfill()
-                return
-            }
-            
-            asyncExpectation.fulfill()
+    func testRequest() {
+        let request = CoolRequest<LoginResult>();
+        let requestable = API.login(email: "", password: "")
+        request.execute(requestable: requestable) { (error: String, result: LoginResult?) in
+            print("Finished.")
         }
-    }
-    
-    func testGetAvatar(asyncExpectation: XCTestExpectation) {
-        let rest = RESTManager.sharedInstance
-        let fields = [Constants.avatarURLKey, Constants.avatarRotationKey]
-        let getInfo = API.getUserInfo(objectId: rest.loggedInObjectId, accessToken: rest.accessToken, params: fields)
-        
-        rest.execute(requestable: getInfo) { [weak self] (error, data) in
-            if (!error.isEmpty) {
-                print("Error: \(error)")
-                XCTAssert(false)
-                asyncExpectation.fulfill()
-                return
-            }
-            
-            self?.testLogout(asyncExpectation: asyncExpectation)
-        }
-    }
-    
-    func testSetAvatar(asyncExpectation: XCTestExpectation) {
-        let rest = RESTManager.sharedInstance
-        let info = ["avatarURL": "https://wwww.namenamename.com/avatar213.jpg",
-                    "avatarRotation": "90"]
-        let setInfo = API.setUserInfo(objectId: rest.loggedInObjectId, accessToken: rest.accessToken, info: info)
-        
-        rest.execute(requestable: setInfo) { [weak self] (error, data) in
-            if (!error.isEmpty) {
-                print("Error: \(error)")
-                XCTAssert(false)
-                asyncExpectation.fulfill()
-                return
-            }
-            
-            self?.testGetAvatar(asyncExpectation: asyncExpectation)
-        }
-    }
-    
-    func testRequestChain() {
-        let login = API.login(email: "sdjkf@adfsdf.dfg", password: "password23")
-        let theExpectation = expectation(description: "lre")
-        let rest = RESTManager.sharedInstance
-        
-        rest.execute(requestable: login) { [weak self] (error, data) in
-            if (!error.isEmpty) {
-                print("Error: \(error)")
-                XCTAssert(false)
-                theExpectation.fulfill()
-                return
-            }
-            
-            self?.testSetAvatar(asyncExpectation: theExpectation)
-        }
-        
-        wait(for: [theExpectation], timeout: 200.0)
     }
     
     func testPerformanceExample() {

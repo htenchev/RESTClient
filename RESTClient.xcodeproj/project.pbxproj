@@ -19,8 +19,6 @@
 		AB255A971F793DBE001F9425 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A951F793DBE001F9425 /* Request.swift */; };
 		AB3940181F7A563900681911 /* RegistrationResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = AB3940171F7A563900681911 /* RegistrationResponse.json */; };
 		AB39401A1F7A566200681911 /* LoginResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = AB3940191F7A566200681911 /* LoginResponse.json */; };
-		AB39401C1F7A5E3E00681911 /* RESTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39401B1F7A5E3E00681911 /* RESTManager.swift */; };
-		AB39401D1F7A5E3E00681911 /* RESTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39401B1F7A5E3E00681911 /* RESTManager.swift */; };
 		AB39401F1F7A5F2B00681911 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39401E1F7A5F2B00681911 /* Model.swift */; };
 		AB3940201F7A5F2B00681911 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39401E1F7A5F2B00681911 /* Model.swift */; };
 		AB3B27131F7D12EC0023E324 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27121F7D12EC0023E324 /* Utils.swift */; };
@@ -56,7 +54,6 @@
 		AB255A951F793DBE001F9425 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		AB3940171F7A563900681911 /* RegistrationResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RegistrationResponse.json; sourceTree = "<group>"; };
 		AB3940191F7A566200681911 /* LoginResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginResponse.json; sourceTree = "<group>"; };
-		AB39401B1F7A5E3E00681911 /* RESTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTManager.swift; sourceTree = "<group>"; };
 		AB39401E1F7A5F2B00681911 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		AB3B27121F7D12EC0023E324 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSerialization.swift; sourceTree = "<group>"; };
@@ -112,7 +109,6 @@
 				AB255A8F1F793850001F9425 /* API.swift */,
 				AB255A951F793DBE001F9425 /* Request.swift */,
 				AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */,
-				AB39401B1F7A5E3E00681911 /* RESTManager.swift */,
 				AB39401E1F7A5F2B00681911 /* Model.swift */,
 				AB3B27121F7D12EC0023E324 /* Utils.swift */,
 			);
@@ -236,7 +232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB255A721F792FB1001F9425 /* ViewController.swift in Sources */,
-				AB39401C1F7A5E3E00681911 /* RESTManager.swift in Sources */,
 				AB3B27161F7D1D9B0023E324 /* DataSerialization.swift in Sources */,
 				AB255A901F793850001F9425 /* API.swift in Sources */,
 				AB3B27131F7D12EC0023E324 /* Utils.swift in Sources */,
@@ -253,7 +248,6 @@
 			files = (
 				AB3940201F7A5F2B00681911 /* Model.swift in Sources */,
 				AB255A911F793850001F9425 /* API.swift in Sources */,
-				AB39401D1F7A5E3E00681911 /* RESTManager.swift in Sources */,
 				AB255A971F793DBE001F9425 /* Request.swift in Sources */,
 				AB255A851F792FB1001F9425 /* RESTClientTests.swift in Sources */,
 				AB3B27171F7D1D9B0023E324 /* DataSerialization.swift in Sources */,

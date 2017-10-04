@@ -66,3 +66,48 @@ extension APIRequest {
     }
 }
 
+struct CoolRequest<ResourceType: ModelType> : APIRequest {
+    func modelFromData(data: Data) -> ResourceType? {
+        return ResourceType.create(jsonDict: JSONDictionary()) as? ResourceType
+    }
+    
+    func execute(requestable: Requestable, completion: @escaping (String, ResourceType?) -> Void) {
+        guard let operation = requestable as? API else {
+            completion("Bad requestable", nil)
+            return
+        }
+        
+        let resourceTypeStr = NSStringFromClass((ResourceType.self as? AnyClass)!)
+        
+        func onInputOutputTypesMismatch() {
+            assert(false)
+            completion("onInputOutputTypesMismatch", nil)
+        }
+
+        switch operation {
+        case .login:
+            if resourceTypeStr != NSStringFromClass(LoginResult.self) {
+                onInputOutputTypesMismatch()
+            }
+        case .register:
+            if resourceTypeStr != NSStringFromClass(RegistrationResult.self) {
+                onInputOutputTypesMismatch()
+            }
+        case .logout:
+            if resourceTypeStr != NSStringFromClass(LogoutResult.self) {
+                onInputOutputTypesMismatch()
+            }
+        case .getUserInfo:
+            if resourceTypeStr != NSStringFromClass(GetAvatarResult.self) {
+                onInputOutputTypesMismatch()
+            }
+
+        case .setUserInfo:
+            if resourceTypeStr != NSStringFromClass(SetAvatarResult.self) {
+                onInputOutputTypesMismatch()
+            }
+        }
+        
+        load(requestable: requestable, completion: completion)
+    }
+}
