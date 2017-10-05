@@ -8,6 +8,7 @@
 
 import Foundation
 
+// This is "collection" of methods for REST requests to our server.
 enum API {
     case login(email: String, password: String)
     case register(email: String, password: String, username: String)
@@ -16,11 +17,18 @@ enum API {
     case setUserAvatar(objectId: String, accessToken: String, url: String)
 }
 
+// A Requastable type is one that can generate a URLRequest object
+// and it knows the type of the result that should be returned if
+// the request is successful.
 protocol Requestable {
     var urlRequest: URLRequest? { get }
     var resultType: String { get }
 }
 
+// Our API conforms to the requestable protocol, we currently map
+// each operation type to a Model object type. This extension is
+// split into different methods for function paths, http payload,
+// etc.
 extension API : Requestable {
     var resultType: String {
         var result = ""

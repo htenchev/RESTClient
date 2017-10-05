@@ -12,6 +12,9 @@ enum RequestElement : String {
     case username, password, email, accessToken, avatarURL, objectId
 }
 
+// We check if our input is valid and return details about it:
+// The result tells which elements passed validation, and which
+// did not by using the InputValidationResult type.
 protocol RequestInputValidation {
     typealias InputValidationResult = [RequestElement: Bool]
     func validate() -> InputValidationResult
@@ -20,6 +23,8 @@ protocol RequestInputValidation {
 extension API : RequestInputValidation {
     typealias ElementValidator = (String) -> Bool
     
+    // We perform validation by different functors for the different fields.
+    // TODO: rewrite this using flatMap
     func validate() -> InputValidationResult {
         var result: InputValidationResult = [:];
         

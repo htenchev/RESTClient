@@ -78,11 +78,11 @@ class RequestDataTests: XCTestCase {
         let setAvatar = API.setUserAvatar(objectId: "345235-f34fwef", accessToken: "34fsdg", url: "brokenURL")
         let getAvatar = API.getUserAvatar(objectId: "sdfsdgfsg", accessToken: "e5tdfgsdfg")
         
-        XCTAssert(CoolRequest<RegistrationResult>(requestable: register).isInputConsistentWithOutput())
-        XCTAssert(CoolRequest<LoginResult>(requestable: login).isInputConsistentWithOutput())
-        XCTAssert(CoolRequest<LogoutResult>(requestable: logout).isInputConsistentWithOutput())
-        XCTAssert(CoolRequest<SetAvatarResult>(requestable: setAvatar).isInputConsistentWithOutput())
-        XCTAssert(CoolRequest<GetAvatarResult>(requestable: getAvatar).isInputConsistentWithOutput())
+        XCTAssert(RESTRequest<RegistrationResult>(requestable: register).isInputConsistentWithOutput())
+        XCTAssert(RESTRequest<LoginResult>(requestable: login).isInputConsistentWithOutput())
+        XCTAssert(RESTRequest<LogoutResult>(requestable: logout).isInputConsistentWithOutput())
+        XCTAssert(RESTRequest<SetAvatarResult>(requestable: setAvatar).isInputConsistentWithOutput())
+        XCTAssert(RESTRequest<GetAvatarResult>(requestable: getAvatar).isInputConsistentWithOutput())
     }
     
     func testPerformanceExample() {

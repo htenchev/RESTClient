@@ -116,7 +116,7 @@ class RESTClientTests: XCTestCase {
     }
     
     func testRequest() {
-        let request = CoolRequest<LoginResult>();
+        let request = RESTRequest<LoginResult>();
         let requestable = API.login(email: "", password: "")
         request.execute(requestable: requestable) { (error: String, result: LoginResult?) in
             print("Finished.")
