@@ -15,13 +15,16 @@ protocol ModelType {
 }
 
 struct LoginResult : ModelType {
-    var userToken: String = ""
-    var objectId: String = ""
+    let userToken: String
+    let objectId: String
     
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
-            let tokenValue = dict[Constants.accessTokenKey] as? String,
-            let objectIdValue = dict[Constants.objectIdKey] as? String else {
+        let tokenValue = dict[Constants.accessTokenKey] as? String,
+        let objectIdValue = dict[Constants.objectIdKey] as? String else {
+            userToken = ""
+            objectId = ""
+                
             return
         }
         
@@ -35,16 +38,20 @@ struct LoginResult : ModelType {
 }
 
 struct RegistrationResult : ModelType {
-    var email: String = ""
-    var objectId: String = ""
-    var username: String = ""
+    let email: String
+    let objectId: String
+    let username: String
     
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
-            let usernameValue = dict[Constants.usernameKey] as? String,
-            let objectIdValue = dict[Constants.objectIdKey] as? String,
-            let emailValue = dict[Constants.emailKey] as? String else {
-            return
+        let usernameValue = dict[Constants.usernameKey] as? String,
+        let objectIdValue = dict[Constants.objectIdKey] as? String,
+        let emailValue = dict[Constants.emailKey] as? String else {
+                email = ""
+                objectId = ""
+                username = ""
+                
+                return
         }
         
         email = emailValue
@@ -68,12 +75,13 @@ struct LogoutResult : ModelType {
 }
 
 struct SetAvatarResult : ModelType {
-    var avatarURL: String = ""
+    let avatarURL: String
 
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
-            let avatarURLValue = dict[Constants.usernameKey] as? String else {
-                return
+        let avatarURLValue = dict[Constants.usernameKey] as? String else {
+            avatarURL = ""
+            return
         }
 
         avatarURL = avatarURLValue
@@ -85,12 +93,13 @@ struct SetAvatarResult : ModelType {
 }
 
 struct GetAvatarResult : ModelType {
-    var avatarURL: String = ""
+    let avatarURL: String
     
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
-            let avatarURLValue = dict[Constants.usernameKey] as? String else {
-                return
+        let avatarURLValue = dict[Constants.usernameKey] as? String else {
+            avatarURL = ""
+            return
         }
         
         avatarURL = avatarURLValue
