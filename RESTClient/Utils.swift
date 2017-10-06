@@ -26,7 +26,7 @@ struct Constants {
     static let accessTokenKey = "user-token"
     static let avatarURLKey = "avatarURL"
     static let avatarRotationKey = "avatarRotation"
-    static let objectId = "objectId"
+    static let objectIdKey = "objectId"
     
     // Headers
     static let contentType = "Content-Type"

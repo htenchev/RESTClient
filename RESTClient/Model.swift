@@ -21,7 +21,7 @@ struct LoginResult : ModelType {
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
             let tokenValue = dict[Constants.accessTokenKey] as? String,
-            let objectIdValue = dict[Constants.objectId] as? String else {
+            let objectIdValue = dict[Constants.objectIdKey] as? String else {
             return
         }
         
@@ -41,9 +41,9 @@ struct RegistrationResult : ModelType {
     
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
-        let usernameValue = dict[Constants.usernameKey] as? String,
-        let objectIdValue = dict[Constants.objectId] as? String,
-        let emailValue = dict[Constants.emailKey] as? String else {
+            let usernameValue = dict[Constants.usernameKey] as? String,
+            let objectIdValue = dict[Constants.objectIdKey] as? String,
+            let emailValue = dict[Constants.emailKey] as? String else {
             return
         }
         

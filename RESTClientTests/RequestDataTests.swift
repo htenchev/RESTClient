@@ -10,19 +10,24 @@ import XCTest
 
 protocol ValidJSONGenerator {
     static func validJSON() -> JSONValue
-    static func fieldKeys() -> [String]
 }
 
 extension RegistrationResult : ValidJSONGenerator {
-    static func fieldKeys() -> [String] {
-        return [Constants.emailKey, Constants.objectId, Constants.usernameKey]
-    }
-    
     static func validJSON() -> JSONValue {
         return [
             Constants.emailKey: "todor@abv.bg",
-            Constants.objectId: "JKHASD-DS-sSDsdf-8sduf",
-            Constants.usernameKey: "Todor Ludiqt" ]
+            Constants.objectIdKey: "JKHASD-DS-sSDsdf-8sduf",
+            Constants.usernameKey: "Todor Ludiqt"
+        ]
+    }
+}
+
+extension LoginResult : ValidJSONGenerator {
+    static func validJSON() -> JSONValue {
+        return [
+            Constants.accessTokenKey : "slskdf-34-wf3-4f-f-sf",
+            Constants.objectIdKey: "JJKASDD-DSF-SF-SDDF821"
+        ]
     }
 }
 
@@ -103,7 +108,7 @@ class RequestDataTests: XCTestCase {
         XCTAssert(RESTRequest<GetAvatarResult>(requestable: getAvatar).isInputConsistentWithOutput())
     }
     
-    func testRegistrationParsing() {
+    func testRegistrationResultParsing() {
         let json = RegistrationResult.validJSON()
         let regResult = RegistrationResult(data: json)
         
@@ -124,7 +129,7 @@ class RequestDataTests: XCTestCase {
         XCTAssert(reg.email == "")
         
         // Test missing user id
-        jsonDict.removeValue(forKey: Constants.objectId)
+        jsonDict.removeValue(forKey: Constants.objectIdKey)
         reg = RegistrationResult(data: jsonDict)
         XCTAssert(reg.objectId == "")
         
@@ -132,6 +137,31 @@ class RequestDataTests: XCTestCase {
         jsonDict.removeValue(forKey: Constants.usernameKey)
         reg = RegistrationResult(data: jsonDict)
         XCTAssert(reg.username == "")
+    }
+    
+    func testLoginResultParsing() {
+        let json = LoginResult.validJSON()
+        let loginResult = LoginResult(data: json)
+        
+        // Test with correct data
+        XCTAssert(loginResult.userToken == "slskdf-34-wf3-4f-f-sf")
+        XCTAssert(loginResult.objectId == "JJKASDD-DSF-SF-SDDF821")
+        
+        // Tests with missing fields
+        guard var jsonDict = LoginResult.validJSON() as? JSONDictionary else {
+            XCTAssert(false, "json data is not a dict")
+            return
+        }
+        
+        // Test missing aceessToken
+        jsonDict.removeValue(forKey: Constants.accessTokenKey)
+        var login = LoginResult(data: jsonDict)
+        XCTAssert(login.userToken == "")
+        
+        // Test missing user id
+        jsonDict.removeValue(forKey: Constants.objectIdKey)
+        login = LoginResult(data: jsonDict)
+        XCTAssert(login.objectId == "")
     }
     
     func testPerformanceExample() {
