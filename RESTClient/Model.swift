@@ -9,74 +9,95 @@
 import Foundation
 import UIKit
 
-struct UserAvatar {
-    var url: String = ""
-    
-    init(with json: JSONDictionary) {
-        if let urlString: String = json.value(forKey: Constants.avatarURLKey) {
-            url = urlString
-        }
-    }
-    
-    var isValid: Bool {
-        return !url.isEmpty && url.contains(Constants.validImageDomain) && url.contains(Constants.validImageFormat)
-    }
-}
-
 protocol ModelType {
     associatedtype ConvertedType
-    static func create(jsonDict: JSONDictionary) -> ConvertedType;
+    static func create(data: JSONValue) -> ConvertedType;
 }
 
-class LoginResult : ModelType {
+struct LoginResult : ModelType {
     var userToken: String = ""
+    var objectId: String = ""
     
-    init(jsonDict: JSONDictionary) {
+    init(data: JSONValue) {
+        guard let dict = data as? JSONDictionary,
+            let tokenValue = dict[Constants.accessTokenKey] as? String,
+            let objectIdValue = dict[Constants.objectId] as? String else {
+            return
+        }
         
+        userToken = tokenValue
+        objectId = objectIdValue
     }
     
-    static func create(jsonDict: JSONDictionary) -> LoginResult {
-        return LoginResult(jsonDict: jsonDict)
+    static func create(data: JSONValue) -> LoginResult {
+        return LoginResult(data: data)
     }
 }
 
-class RegistrationResult : ModelType {
-    init(jsonDict: JSONDictionary) {
+struct RegistrationResult : ModelType {
+    var email: String = ""
+    var objectId: String = ""
+    var username: String = ""
+    
+    init(data: JSONValue) {
+        guard let dict = data as? JSONDictionary,
+        let usernameValue = dict[Constants.usernameKey] as? String,
+        let objectIdValue = dict[Constants.objectId] as? String,
+        let emailValue = dict[Constants.emailKey] as? String else {
+            return
+        }
         
+        email = emailValue
+        objectId = objectIdValue
+        username = usernameValue
     }
     
-    static func create(jsonDict: JSONDictionary) -> RegistrationResult {
-        return RegistrationResult(jsonDict: jsonDict)
+    static func create(data: JSONValue) -> RegistrationResult {
+        return RegistrationResult(data: data)
     }
 }
 
-class LogoutResult : ModelType {
-    init(jsonDict: JSONDictionary) {
+struct LogoutResult : ModelType {
+    init(data: JSONValue) {
         
     }
     
-    static func create(jsonDict: JSONDictionary) -> LogoutResult {
-        return LogoutResult(jsonDict: jsonDict)
+    static func create(data: JSONValue) -> LogoutResult {
+        return LogoutResult(data: data)
     }
 }
 
-class SetAvatarResult : ModelType {
-    init(jsonDict: JSONDictionary) {
-        
+struct SetAvatarResult : ModelType {
+    var avatarURL: String = ""
+
+    init(data: JSONValue) {
+        guard let dict = data as? JSONDictionary,
+            let avatarURLValue = dict[Constants.usernameKey] as? String else {
+                return
+        }
+
+        avatarURL = avatarURLValue
     }
     
-    static func create(jsonDict: JSONDictionary) -> SetAvatarResult {
-        return SetAvatarResult(jsonDict: jsonDict)
+    static func create(data: JSONValue) -> SetAvatarResult {
+        return SetAvatarResult(data: data)
     }
 }
 
-class GetAvatarResult : ModelType {
-    init(jsonDict: JSONDictionary) {
+struct GetAvatarResult : ModelType {
+    var avatarURL: String = ""
+    
+    init(data: JSONValue) {
+        guard let dict = data as? JSONDictionary,
+            let avatarURLValue = dict[Constants.usernameKey] as? String else {
+                return
+        }
         
+        avatarURL = avatarURLValue
     }
     
-    static func create(jsonDict: JSONDictionary) -> GetAvatarResult {
-        return GetAvatarResult(jsonDict: jsonDict)
+    static func create(data: JSONValue) -> GetAvatarResult {
+        return GetAvatarResult(data: data)
     }
 }
 

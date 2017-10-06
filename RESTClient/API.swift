@@ -34,11 +34,11 @@ extension API : Requestable {
         var result = ""
         
         switch self {
-        case .login: result = NSStringFromClass(LoginResult.self)
-        case .register: result = NSStringFromClass(RegistrationResult.self)
-        case .logout: result = NSStringFromClass(LogoutResult.self)
-        case .setUserAvatar: result = NSStringFromClass(SetAvatarResult.self)
-        case .getUserAvatar: result = NSStringFromClass(GetAvatarResult.self)
+        case .login: result = NSStringFromClass(LoginResult.self as! AnyClass)
+        case .register: result = NSStringFromClass(RegistrationResult.self as! AnyClass)
+        case .logout: result = NSStringFromClass(LogoutResult.self as! AnyClass)
+        case .setUserAvatar: result = NSStringFromClass(SetAvatarResult.self as! AnyClass)
+        case .getUserAvatar: result = NSStringFromClass(GetAvatarResult.self as! AnyClass)
         }
         
         return result

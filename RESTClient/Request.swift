@@ -91,23 +91,17 @@ class RESTRequest<ResourceType: ModelType> : APIRequest {
         return requestable.resultType == NSStringFromClass(resourceClass)
     }
     
-    // Convert data to JSON an let the Model classes handle parsing
+    // Convert data to JSON an let the ModelType classes handle parsing
     static func modelFromData(data: Data) -> ResourceType? {
-        guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []) else {
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
+            let jsonValue = jsonObject as? JSONValue else {
             return nil
         }
         
-        if jsonObject is JSONDictionary {
-            return ResourceType.create(jsonDict: JSONDictionary()) as? ResourceType
-        }
-        else if jsonObject is JSONArray {
-            return nil // TODO: return a model object(or an array of model objects)
-        }
-        
-        return nil
+        return ResourceType.create(data: jsonValue) as? ResourceType
     }
     
-    fileprivate func execute(completion: @escaping (String, ResourceType?) -> Void) {
+    func execute(completion: @escaping (String, ResourceType?) -> Void) {
         if !isInputConsistentWithOutput() {
             assert(false)
             completion("Input inconsistent with output. Cannot request a \(ResourceType.self) with a \(requestable) type of request.", nil)
