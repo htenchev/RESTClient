@@ -8,6 +8,24 @@
 
 import XCTest
 
+protocol ValidJSONGenerator {
+    static func validJSON() -> JSONValue
+    static func fieldKeys() -> [String]
+}
+
+extension RegistrationResult : ValidJSONGenerator {
+    static func fieldKeys() -> [String] {
+        return [Constants.emailKey, Constants.objectId, Constants.usernameKey]
+    }
+    
+    static func validJSON() -> JSONValue {
+        return [
+            Constants.emailKey: "todor@abv.bg",
+            Constants.objectId: "JKHASD-DS-sSDsdf-8sduf",
+            Constants.usernameKey: "Todor Ludiqt" ]
+    }
+}
+
 class RequestDataTests: XCTestCase {
     
     override func setUp() {
@@ -83,6 +101,37 @@ class RequestDataTests: XCTestCase {
         XCTAssert(RESTRequest<LogoutResult>(requestable: logout).isInputConsistentWithOutput())
         XCTAssert(RESTRequest<SetAvatarResult>(requestable: setAvatar).isInputConsistentWithOutput())
         XCTAssert(RESTRequest<GetAvatarResult>(requestable: getAvatar).isInputConsistentWithOutput())
+    }
+    
+    func testRegistrationParsing() {
+        let json = RegistrationResult.validJSON()
+        let regResult = RegistrationResult(data: json)
+        
+        // Test with correct data
+        XCTAssert(regResult.email == "todor@abv.bg")
+        XCTAssert(regResult.objectId == "JKHASD-DS-sSDsdf-8sduf")
+        XCTAssert(regResult.username == "Todor Ludiqt")
+
+        // Tests with missing fields
+        guard var jsonDict = RegistrationResult.validJSON() as? JSONDictionary else {
+            XCTAssert(false, "json data is not a dict")
+            return
+        }
+        
+        // Test missing mail
+        jsonDict.removeValue(forKey: Constants.emailKey)
+        var reg = RegistrationResult(data: jsonDict)
+        XCTAssert(reg.email == "")
+        
+        // Test missing user id
+        jsonDict.removeValue(forKey: Constants.objectId)
+        reg = RegistrationResult(data: jsonDict)
+        XCTAssert(reg.objectId == "")
+        
+        // Test missing username
+        jsonDict.removeValue(forKey: Constants.usernameKey)
+        reg = RegistrationResult(data: jsonDict)
+        XCTAssert(reg.username == "")
     }
     
     func testPerformanceExample() {

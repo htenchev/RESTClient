@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClientTests/RESTClientTests.swift"
-            timestampString = "528371908.058051"
+            timestampString = "528997863.496828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClientTests/RESTClientTests.swift"
-            timestampString = "528371908.058142"
+            timestampString = "528997863.496987"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClientTests/RESTClientTests.swift"
-            timestampString = "528371908.058214"
+            timestampString = "528997863.497063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -58,45 +58,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClientTests/RESTClientTests.swift"
-            timestampString = "528371908.058544"
+            timestampString = "528997863.497132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
             endingLineNumber = "64"
             landmarkName = "testRegistrationRequestData()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RESTClientTests.RESTClientTests.testRegData() -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/RESTClientTests.swift"
-                  timestampString = "528371909.560137"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
-                  offsetFromSymbolStart = "374">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #1 : @autoclosure () throws -&gt; Swift.Bool in RESTClientTests.RESTClientTests.testRegData() -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/RESTClientTests.swift"
-                  timestampString = "528371909.562955"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
-                  offsetFromSymbolStart = "98">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
