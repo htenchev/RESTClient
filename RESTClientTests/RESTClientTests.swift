@@ -85,20 +85,19 @@ class RESTClientTests: XCTestCase {
     func testSetUserInfoRequestData() {
         let objectId = "SJHFGS879-SDMFSDF6-FVSDJF68SD7F-SJKGHFJGSDF"
         let accessToken = "sjkdfhskdf-3f-s-f-adjhbajskdhagsjd"
-        let userInfoToSet = [Constants.avatarURLKey : "http://mydomain.bg/mypic.jpg"]
-        let setUserInfo = API.setUserInfo(objectId: objectId, accessToken: accessToken, info: userInfoToSet)
+        let url = "http://mydomain.bg/mypic.jpg"
+        let setUserInfo = API.setUserAvatar(objectId: objectId, accessToken: accessToken, url: url)
         
         let headers = [Constants.contentType : Constants.contentTypeJSON,
                       Constants.accessTokenKey : accessToken]
         
-        testAPIRequestTransform(myRequest: setUserInfo, httpMethod: "PUT", headers: headers, body: userInfoToSet)
+        //testAPIRequestTransform(myRequest: setUserInfo, httpMethod: "PUT", headers: headers, body: userInfoToSet)
     }
     
     func testGetUserInfoRequestData() {
         let objectId = "SJHFGS879-SDMFSDF6-FVSDJF68SD7F-SJKGHFJGSDF"
         let accessToken = "sjkdfhskdf-3f-s-f-adjhbajskdhagsjd"
-        let userInfoToGet = [Constants.avatarURLKey]
-        let getUserInfo = API.getUserInfo(objectId: objectId, accessToken: accessToken, params: userInfoToGet)
+        let getUserInfo = API.getUserAvatar(objectId: objectId, accessToken: accessToken)
         
         let headers = [Constants.contentType : Constants.contentTypeJSON,
                        Constants.accessTokenKey : accessToken]
@@ -114,15 +113,7 @@ class RESTClientTests: XCTestCase {
         
         testAPIRequestTransform(myRequest: logout, httpMethod: "GET", headers: headers, body: nil)
     }
-    
-    func testRequest() {
-        let request = RESTRequest<LoginResult>();
-        let requestable = API.login(email: "", password: "")
-        request.execute(requestable: requestable) { (error: String, result: LoginResult?) in
-            print("Finished.")
-        }
-    }
-    
+        
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
