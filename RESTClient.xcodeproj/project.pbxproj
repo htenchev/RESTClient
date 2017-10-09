@@ -7,25 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0C48CF1F8B998C00C5209E /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0C48CE1F8B998C00C5209E /* IntegrationTests.swift */; };
 		AB255A701F792FB1001F9425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A6F1F792FB1001F9425 /* AppDelegate.swift */; };
 		AB255A721F792FB1001F9425 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A711F792FB1001F9425 /* ViewController.swift */; };
 		AB255A751F792FB1001F9425 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB255A731F792FB1001F9425 /* Main.storyboard */; };
 		AB255A771F792FB1001F9425 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB255A761F792FB1001F9425 /* Assets.xcassets */; };
 		AB255A7A1F792FB1001F9425 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB255A781F792FB1001F9425 /* LaunchScreen.storyboard */; };
-		AB255A851F792FB1001F9425 /* RESTClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A841F792FB1001F9425 /* RESTClientTests.swift */; };
+		AB255A851F792FB1001F9425 /* RESTInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A841F792FB1001F9425 /* RESTInputTests.swift */; };
 		AB255A901F793850001F9425 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A8F1F793850001F9425 /* API.swift */; };
 		AB255A911F793850001F9425 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A8F1F793850001F9425 /* API.swift */; };
 		AB255A961F793DBE001F9425 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A951F793DBE001F9425 /* Request.swift */; };
 		AB255A971F793DBE001F9425 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB255A951F793DBE001F9425 /* Request.swift */; };
-		AB3940181F7A563900681911 /* RegistrationResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = AB3940171F7A563900681911 /* RegistrationResponse.json */; };
-		AB39401A1F7A566200681911 /* LoginResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = AB3940191F7A566200681911 /* LoginResponse.json */; };
 		AB39401F1F7A5F2B00681911 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39401E1F7A5F2B00681911 /* Model.swift */; };
 		AB3940201F7A5F2B00681911 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39401E1F7A5F2B00681911 /* Model.swift */; };
 		AB3B27131F7D12EC0023E324 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27121F7D12EC0023E324 /* Utils.swift */; };
 		AB3B27141F7D12EC0023E324 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27121F7D12EC0023E324 /* Utils.swift */; };
 		AB3B27161F7D1D9B0023E324 /* DataSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */; };
 		AB3B27171F7D1D9B0023E324 /* DataSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */; };
-		AB3C9F1D1F84F30000981A6C /* RequestDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C9F1C1F84F30000981A6C /* RequestDataTests.swift */; };
+		AB3C9F1D1F84F30000981A6C /* RESTJSONParseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C9F1C1F84F30000981A6C /* RESTJSONParseTests.swift */; };
 		AB6EFA941F83D7BF00D326FB /* RequestValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */; };
 		AB6EFA951F83D7BF00D326FB /* RequestValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB0C48CE1F8B998C00C5209E /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		AB255A6C1F792FB1001F9425 /* RESTClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RESTClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB255A6F1F792FB1001F9425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB255A711F792FB1001F9425 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,16 +49,14 @@
 		AB255A791F792FB1001F9425 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB255A7B1F792FB1001F9425 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB255A801F792FB1001F9425 /* RESTClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RESTClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB255A841F792FB1001F9425 /* RESTClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTClientTests.swift; sourceTree = "<group>"; };
+		AB255A841F792FB1001F9425 /* RESTInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTInputTests.swift; sourceTree = "<group>"; };
 		AB255A861F792FB1001F9425 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB255A8F1F793850001F9425 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AB255A951F793DBE001F9425 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		AB3940171F7A563900681911 /* RegistrationResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RegistrationResponse.json; sourceTree = "<group>"; };
-		AB3940191F7A566200681911 /* LoginResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoginResponse.json; sourceTree = "<group>"; };
 		AB39401E1F7A5F2B00681911 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		AB3B27121F7D12EC0023E324 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		AB3B27151F7D1D9B0023E324 /* DataSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSerialization.swift; sourceTree = "<group>"; };
-		AB3C9F1C1F84F30000981A6C /* RequestDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDataTests.swift; sourceTree = "<group>"; };
+		AB3C9F1C1F84F30000981A6C /* RESTJSONParseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RESTJSONParseTests.swift; sourceTree = "<group>"; };
 		AB6EFA931F83D7BF00D326FB /* RequestValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestValidation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,11 +118,10 @@
 		AB255A831F792FB1001F9425 /* RESTClientTests */ = {
 			isa = PBXGroup;
 			children = (
-				AB255A841F792FB1001F9425 /* RESTClientTests.swift */,
-				AB3C9F1C1F84F30000981A6C /* RequestDataTests.swift */,
+				AB255A841F792FB1001F9425 /* RESTInputTests.swift */,
+				AB3C9F1C1F84F30000981A6C /* RESTJSONParseTests.swift */,
+				AB0C48CE1F8B998C00C5209E /* IntegrationTests.swift */,
 				AB255A861F792FB1001F9425 /* Info.plist */,
-				AB3940171F7A563900681911 /* RegistrationResponse.json */,
-				AB3940191F7A566200681911 /* LoginResponse.json */,
 			);
 			path = RESTClientTests;
 			sourceTree = "<group>";
@@ -222,8 +219,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB3940181F7A563900681911 /* RegistrationResponse.json in Resources */,
-				AB39401A1F7A566200681911 /* LoginResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,11 +247,12 @@
 				AB3940201F7A5F2B00681911 /* Model.swift in Sources */,
 				AB255A911F793850001F9425 /* API.swift in Sources */,
 				AB255A971F793DBE001F9425 /* Request.swift in Sources */,
-				AB255A851F792FB1001F9425 /* RESTClientTests.swift in Sources */,
+				AB255A851F792FB1001F9425 /* RESTInputTests.swift in Sources */,
 				AB3B27171F7D1D9B0023E324 /* DataSerialization.swift in Sources */,
 				AB6EFA951F83D7BF00D326FB /* RequestValidation.swift in Sources */,
 				AB3B27141F7D12EC0023E324 /* Utils.swift in Sources */,
-				AB3C9F1D1F84F30000981A6C /* RequestDataTests.swift in Sources */,
+				AB3C9F1D1F84F30000981A6C /* RESTJSONParseTests.swift in Sources */,
+				AB0C48CF1F8B998C00C5209E /* IntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

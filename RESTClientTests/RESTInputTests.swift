@@ -51,15 +51,6 @@ class RESTClientTests: XCTestCase {
         }
     }
     
-    func testRegData() {
-        let mail = "userttt@mailll.bg"
-        let password = "sdfsdf"
-        let username = "User Name"
-        let registration = API.register(email: mail, password: password, username: username)
-        
-        //XCTAssert(registration.isValid)
-    }
-    
     func testRegistrationRequestData() {
         let mail = "userttt@mailll.bg"
         let password = "sdfsdf"
@@ -87,11 +78,11 @@ class RESTClientTests: XCTestCase {
         let accessToken = "sjkdfhskdf-3f-s-f-adjhbajskdhagsjd"
         let url = "http://mydomain.bg/mypic.jpg"
         let setUserInfo = API.setUserAvatar(objectId: objectId, accessToken: accessToken, url: url)
-        
+        let userInfoToSet = [Constants.avatarURLKey: url]
         let headers = [Constants.contentType : Constants.contentTypeJSON,
                       Constants.accessTokenKey : accessToken]
         
-        //testAPIRequestTransform(myRequest: setUserInfo, httpMethod: "PUT", headers: headers, body: userInfoToSet)
+        testAPIRequestTransform(myRequest: setUserInfo, httpMethod: "PUT", headers: headers, body: userInfoToSet)
     }
     
     func testGetUserInfoRequestData() {

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import RESTClient
 
 protocol ValidJSONGenerator {
     static func validJSON() -> JSONValue
@@ -93,21 +94,7 @@ class RequestDataTests: XCTestCase {
         testAPIOperationData(API.setUserAvatar(objectId: "", accessToken: goodToken, url: goodUrl), [.objectId])
         testAPIOperationData(API.setUserAvatar(objectId: goodObjectId, accessToken: goodToken, url: goodUrl), [])
     }
-    
-    func testInputOutputConsistency() {
-        let register = API.register(email: "sdfsdf@mail.bg", password: "sdfhusdfy98sdf", username: "Ivan")
-        let login = API.login(email: "sdfsdf@mail.bg", password: "sdfhusdfy98sdf")
-        let logout = API.logout(accessToken: "sfsfd")
-        let setAvatar = API.setUserAvatar(objectId: "345235-f34fwef", accessToken: "34fsdg", url: "brokenURL")
-        let getAvatar = API.getUserAvatar(objectId: "sdfsdgfsg", accessToken: "e5tdfgsdfg")
         
-        XCTAssert(RESTRequest<RegistrationResult>(requestable: register).isInputConsistentWithOutput())
-        XCTAssert(RESTRequest<LoginResult>(requestable: login).isInputConsistentWithOutput())
-        XCTAssert(RESTRequest<LogoutResult>(requestable: logout).isInputConsistentWithOutput())
-        XCTAssert(RESTRequest<SetAvatarResult>(requestable: setAvatar).isInputConsistentWithOutput())
-        XCTAssert(RESTRequest<GetAvatarResult>(requestable: getAvatar).isInputConsistentWithOutput())
-    }
-    
     func testRegistrationResultParsing() {
         let json = RegistrationResult.validJSON()
         let regResult = RegistrationResult(data: json)

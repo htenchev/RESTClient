@@ -22,7 +22,7 @@ enum API {
 // the request is successful.
 protocol Requestable {
     var urlRequest: URLRequest? { get }
-    var resultType: String { get }
+    var operation: API { get }
 }
 
 // Our API conforms to the requestable protocol, we currently map
@@ -30,20 +30,6 @@ protocol Requestable {
 // split into different methods for function paths, http payload,
 // etc.
 extension API : Requestable {
-    var resultType: String {
-        var result = ""
-        
-        switch self {
-        case .login: result = NSStringFromClass(LoginResult.self as! AnyClass)
-        case .register: result = NSStringFromClass(RegistrationResult.self as! AnyClass)
-        case .logout: result = NSStringFromClass(LogoutResult.self as! AnyClass)
-        case .setUserAvatar: result = NSStringFromClass(SetAvatarResult.self as! AnyClass)
-        case .getUserAvatar: result = NSStringFromClass(GetAvatarResult.self as! AnyClass)
-        }
-        
-        return result
-    }
-    
     var urlRequest: URLRequest? {
         let urlString = Constants.baseUrl + path;
         
@@ -70,6 +56,10 @@ extension API : Requestable {
         
         return request
      }
+    
+    var operation: API {
+        return self
+    }
     
     fileprivate var path: String {
         switch self {
