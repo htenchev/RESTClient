@@ -100,7 +100,8 @@ struct RESTRequest : APIRequest {
         }
     }
     
-    func execute(requestable: Requestable, completion: @escaping (OperationResult) -> Void) {
+    func execute(requestable: Requestable, completion: @escaping (OperationResult) -> Void) -> RESTRequest? {
         load(requestable: requestable, completion: completion)
+        return self
     }
 }

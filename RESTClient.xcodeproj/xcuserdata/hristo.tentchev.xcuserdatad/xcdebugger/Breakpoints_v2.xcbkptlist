@@ -99,5 +99,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RESTClientTests/IntegrationTests.swift"
+            timestampString = "529243987.405099"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "testChain()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RESTClientTests.IntegrationTests.testChain() -&gt; ()"
+                  moduleName = "RESTClientTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
+                  timestampString = "529243869.814721"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "14">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (RESTClientTests.OperationResult) -&gt; () in RESTClientTests.IntegrationTests.testChain() -&gt; ()"
+                  moduleName = "RESTClientTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
+                  timestampString = "529243869.81776"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "53">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

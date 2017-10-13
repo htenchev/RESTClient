@@ -19,10 +19,15 @@ class IntegrationTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+    func testChain() {
+        let exp = expectation(description: "LoginExpectation")
+        
+        RESTRequest().execute(requestable: API.login(email: "skldfj@adas.bg", password: "sdfsdfsdfsdf")) { (op) in
+            print("Result:\(op)")
+        }
+        
+        wait(for: [exp], timeout: 5.0)
     }
     
     func testPerformanceExample() {
