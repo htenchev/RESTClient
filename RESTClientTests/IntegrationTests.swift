@@ -19,12 +19,21 @@ class IntegrationTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    func testLogin(exp: XCTestExpectation, requestable: Requestable) {
+        
+    }
 
     func testChain() {
         let exp = expectation(description: "LoginExpectation")
         
-        RESTRequest().execute(requestable: API.login(email: "skldfj@adas.bg", password: "sdfsdfsdfsdf")) { (op) in
+        RESTRequest().execute(requestable: API.register(email: "bilebile@abv.bg", password: "sdfsdsfs", username: "userneim")) { (op) in
             print("Result:\(op)")
+            
+            switch op {
+            case .error(let errString):
+                XCTAssert(false)
+            }
         }
         
         wait(for: [exp], timeout: 5.0)
