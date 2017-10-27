@@ -32,6 +32,31 @@ extension LoginResult : ValidJSONGenerator {
     }
 }
 
+extension LogoutResult : ValidJSONGenerator {
+    static func validJSON() -> JSONValue {
+        return []
+    }
+}
+
+extension SetAvatarResult : ValidJSONGenerator {
+    static func validJSON() -> JSONValue {
+        return [
+            Constants.avatarURLKey : "http://sitez.bg/cool.jpg",
+            Constants.avatarRotationKey : 10
+        ]
+    }
+}
+
+extension GetAvatarResult : ValidJSONGenerator {
+    static func validJSON() -> JSONValue {
+        return [
+            Constants.avatarURLKey : "http://sitez.bg/cool.jpg",
+            Constants.avatarRotationKey : 10
+        ]
+    }
+}
+
+
 class RequestDataTests: XCTestCase {
     
     override func setUp() {
@@ -105,7 +130,7 @@ class RequestDataTests: XCTestCase {
         XCTAssert(regResult.username == "Todor Ludiqt")
 
         // Tests with missing fields
-        guard var jsonDict = RegistrationResult.validJSON() as? JSONDictionary else {
+        guard var jsonDict = json as? JSONDictionary else {
             XCTAssert(false, "json data is not a dict")
             return
         }
@@ -135,7 +160,7 @@ class RequestDataTests: XCTestCase {
         XCTAssert(loginResult.objectId == "JJKASDD-DSF-SF-SDDF821")
         
         // Tests with missing fields
-        guard var jsonDict = LoginResult.validJSON() as? JSONDictionary else {
+        guard var jsonDict = json as? JSONDictionary else {
             XCTAssert(false, "json data is not a dict")
             return
         }
@@ -149,6 +174,52 @@ class RequestDataTests: XCTestCase {
         jsonDict.removeValue(forKey: Constants.objectIdKey)
         login = LoginResult(data: jsonDict)
         XCTAssert(login.objectId == "")
+    }
+    
+    func testLogutResultParsing() {
+        let json = LogoutResult.validJSON()
+        //let logoutResult = LogoutResult(data: json)
+        
+        guard var _ = json as? JSONDictionary else {
+            XCTAssert(false, "json data is not a dict")
+            return
+        }
+    }
+    
+    func testSetAvatarResultParsing() {
+        let json = SetAvatarResult.validJSON()
+        let setAvatarRes = SetAvatarResult(data: json)
+        
+        guard var jsonDict = json as? JSONDictionary else {
+            XCTAssert(false, "json data is not a dict")
+            return
+        }
+        
+        // Test with correct data
+        XCTAssertEqual(setAvatarRes.avatarURL, "http://sitez.bg/cool.jpg")
+        
+        // Test with a missing avatar field
+        jsonDict.removeValue(forKey: Constants.avatarURLKey)
+        let avatarRes = SetAvatarResult(data: jsonDict)
+        XCTAssertEqual(avatarRes.avatarURL, "")
+    }
+    
+    func testGetAvatarRеsultParsing() {
+        let json = GetAvatarResult.validJSON()
+        let getAvatarRes = GetAvatarResult(data: json)
+        
+        guard var jsonDict = json as? JSONDictionary else {
+            XCTAssert(false, "json data is not a dict")
+            return
+        }
+        
+        // Test with correct data
+        XCTAssertEqual(getAvatarRes.avatarURL, "http://sitez.bg/cool.jpg")
+        
+        // Test with a missing avatar field
+        jsonDict.removeValue(forKey: Constants.avatarURLKey)
+        let avatarRes = GetAvatarResult(data: jsonDict)
+        XCTAssertEqual(avatarRes.avatarURL, "")
     }
     
     func testPerformanceExample() {

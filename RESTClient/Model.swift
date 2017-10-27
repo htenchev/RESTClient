@@ -79,12 +79,16 @@ struct SetAvatarResult : ModelType {
 
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
-        let avatarURLValue = dict[Constants.usernameKey] as? String else {
+        let avatarURLValue = dict[Constants.avatarURLKey] as? String else {
             avatarURL = ""
             return
         }
-
+        
         avatarURL = avatarURLValue
+    }
+    
+    var isValid: Bool {
+        return avatarURL.contains(".bg") && avatarURL.contains(".jpg")
     }
     
     static func create(data: JSONValue) -> SetAvatarResult {
@@ -103,6 +107,10 @@ struct GetAvatarResult : ModelType {
         }
         
         avatarURL = avatarURLValue
+    }
+    
+    var isValid: Bool {
+        return avatarURL.contains(".bg") && avatarURL.contains(".jpg")
     }
     
     static func create(data: JSONValue) -> GetAvatarResult {
