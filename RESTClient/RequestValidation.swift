@@ -24,30 +24,35 @@ extension API : RequestInputValidation {
     typealias ElementValidator = (String) -> Bool
     
     // We perform validation by different functors for the different fields.
-    // TODO: rewrite this using flatMap
     func validate() -> InputValidationResult {
         var result: InputValidationResult = [:];
+        var args: [String] = []
+        var types: [RequestElement] = []
         
         switch self {
         case let .register(email, password, username):
-            result[.email] = validatorFor(element: .email)(email)
-            result[.password] = validatorFor(element: .password)(password)
-            result[.username] = validatorFor(element: .username)(username)
+            args = [email, password, username]
+            types = [.email, .password, .username]
             
         case let .login(email, password):
-            result[.email] = validatorFor(element: .email)(email)
-            result[.password] = validatorFor(element: .password)(password)
+            args = [email, password]
+            types = [.email, .password]
+
+        case let .setUserAvatar(objectId, token, _):
+            args = [objectId, token]
+            types = [.objectId, .accessToken]
             
-        case let .setUserAvatar(objectId, token, _): // TODO: params validation
-            result[RequestElement.accessToken] = validatorFor(element: .accessToken)(token)
-            result[.objectId] = validatorFor(element: .objectId)(objectId)
-            
-        case let .getUserAvatar(objectId, token): // TODO params validation
-            result[RequestElement.accessToken] = validatorFor(element: .accessToken)(token)
-            result[.objectId] = validatorFor(element: .objectId)(objectId)
-            
+        case let .getUserAvatar(objectId, token):
+            args = [objectId, token]
+            types = [.objectId, .accessToken]
+
         case let .logout(token):
-            result[RequestElement.accessToken] = validatorFor(element: .accessToken)(token)
+            args = [token]
+            types = [.accessToken]
+        }
+        
+        for (elemType, arg) in zip(types, args) {
+            result[elemType] = validatorFor(element: elemType)(arg)
         }
         
         return result

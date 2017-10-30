@@ -58,6 +58,7 @@ class IntegrationTests: XCTestCase {
         request.execute(requestable: API.setUserAvatar(objectId: loggedInUserId, accessToken: accessToken, url: "https://sitez.bg/cool1.jpg")) { [weak self] (op) in
             
             if case OperationResult.setAvatar(let avatarResult) = op {
+                XCTAssert(avatarResult.isValid)
                 self?.testGetAvatar(expectation: expectation)
             } else if case OperationResult.error(let errorMessage) = op {
                 XCTAssert(false, errorMessage)
