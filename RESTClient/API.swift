@@ -80,23 +80,23 @@ extension API : Requestable {
     }
     
     fileprivate var httpBody: [String: String]? {
-        var result: [String: String]? = [:]
+        var result: [String: String] = [:]
         
         switch self {
         case let .login(email, password):
-            result![Constants.loginKey] = email
-            result![Constants.passwordKey] = password
+            result[Constants.loginKey] = email
+            result[Constants.passwordKey] = password
             
         case let .register(email, password, username):
-            result![Constants.emailKey] = email
-            result![Constants.passwordKey] = password
-            result![Constants.usernameKey] = username
+            result[Constants.emailKey] = email
+            result[Constants.passwordKey] = password
+            result[Constants.usernameKey] = username
             
         case let .setUserAvatar(_, _, avatarUrl):
-            result![Constants.avatarURLKey] = avatarUrl
+            result[Constants.avatarURLKey] = avatarUrl
             
         default:
-            result = nil
+            return nil
         }
         
         return result
