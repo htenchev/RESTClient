@@ -20,8 +20,8 @@ struct LoginResult : ModelType {
     
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
-        let tokenValue = dict[Constants.accessTokenKey] as? String,
-        let objectIdValue = dict[Constants.objectIdKey] as? String else {
+            let tokenValue = dict[Constants.accessTokenKey] as? String,
+            let objectIdValue = dict[Constants.objectIdKey] as? String else {
             userToken = ""
             objectId = ""
                 
