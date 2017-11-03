@@ -71,7 +71,6 @@ class RESTClientTests: XCTestCase {
         let mail = "userttt@mailll.bg"
         let password = "sdfsdf"
         let login = API.login(email: mail, password: password)
-        
         let regHeaders = [Constants.contentType : Constants.contentTypeJSON]
         let regBody = [Constants.loginKey : mail, Constants.passwordKey : password]
         
@@ -96,7 +95,7 @@ class RESTClientTests: XCTestCase {
             return
         }
         
-        testURL(myUrl, Constants.setUserInfoPath)
+        testURL(myUrl, "/users/")
         testAPIRequestTransform(myRequest: setUserInfo, httpMethod: "PUT", headers: headers, body: userInfoToSet)
     }
     
@@ -112,7 +111,7 @@ class RESTClientTests: XCTestCase {
             return
         }
         
-        testURL(url, Constants.getUserInfoPath)
+        testURL(url, "/users/")
         testAPIRequestTransform(myRequest: getUserInfo, httpMethod: "GET", headers: headers, body: nil)
     }
     
