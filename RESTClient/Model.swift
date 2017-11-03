@@ -101,7 +101,7 @@ struct GetAvatarResult : ModelType {
     
     init(data: JSONValue) {
         guard let dict = data as? JSONDictionary,
-        let avatarURLValue = dict[Constants.usernameKey] as? String else {
+        let avatarURLValue = dict[Constants.avatarURLKey] as? String else {
             avatarURL = ""
             return
         }

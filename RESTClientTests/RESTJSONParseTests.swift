@@ -92,12 +92,12 @@ class RequestDataTests: XCTestCase {
         testAPIOperationData(API.register(email: "sdfsdf", password: "", username: "Ivan"), [RequestElement.password, RequestElement.email])
         testAPIOperationData(API.register(email: "sdfsdf@mail.bg", password: "", username: "Ivan"), [RequestElement.password])
         testAPIOperationData(API.register(email: "sdfsdf@mail.bg", password: "sdfhusdfy98sdf", username: "Ivan"), [])
-        testAPIOperationData(API.register(email: "sdfsdf@mail.bg", password: "sdfhusdfy98sdf", username: ""), [])
+        testAPIOperationData(API.register(email: "sdfsdf@mail.bg", password: "sdfhusdfy98sdf", username: ""), [RequestElement.username])
     }
     
     func testLogoutData() {
         testAPIOperationData(API.logout(accessToken: ""), [RequestElement.accessToken])
-        testAPIOperationData(API.logout(accessToken: "sdfsdjfkhsdfsiyudfysdjkhf-8sf76s87df-egfe-sdfe4f"), [RequestElement.accessToken])
+        testAPIOperationData(API.logout(accessToken: "sdfsdjfkhsdfsiyudfysdjkhf-8sf76s87df-egfe-sdfe4f"), [])
     }
     
     func testGetAvatarData() {
@@ -174,16 +174,6 @@ class RequestDataTests: XCTestCase {
         jsonDict.removeValue(forKey: Constants.objectIdKey)
         login = LoginResult(data: jsonDict)
         XCTAssert(login.objectId == "")
-    }
-    
-    func testLogutResultParsing() {
-        let json = LogoutResult.validJSON()
-        //let logoutResult = LogoutResult(data: json)
-        
-        guard var _ = json as? JSONDictionary else {
-            XCTAssert(false, "json data is not a dict")
-            return
-        }
     }
     
     func testSetAvatarResultParsing() {

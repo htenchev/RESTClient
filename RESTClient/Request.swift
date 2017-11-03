@@ -106,5 +106,5 @@ struct RESTRequest : APIRequest {
     }
     
     private let requestable: Requestable
-    static let urlSession = URLSession(configuration: URLSessionConfiguration.ephemeral)
+    private static let urlSession = URLSession(configuration: URLSessionConfiguration.ephemeral)
 }

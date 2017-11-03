@@ -59,18 +59,28 @@ class RESTClientTests: XCTestCase {
         let regHeaders = [Constants.contentType : Constants.contentTypeJSON]
         let regBody = [Constants.emailKey : mail, Constants.passwordKey : password, Constants.usernameKey : username]
         
+        guard let url = registration.urlRequest?.url else {
+            return
+        }
+        
+        testURL(url, Constants.registerPath)
         testAPIRequestTransform(myRequest: registration, httpMethod: "POST", headers: regHeaders, body: regBody)
     }
     
     func testLoginRequestData() {
         let mail = "userttt@mailll.bg"
         let password = "sdfsdf"
-        let registration = API.login(email: mail, password: password)
+        let login = API.login(email: mail, password: password)
         
         let regHeaders = [Constants.contentType : Constants.contentTypeJSON]
         let regBody = [Constants.loginKey : mail, Constants.passwordKey : password]
         
-        testAPIRequestTransform(myRequest: registration, httpMethod: "POST", headers: regHeaders, body: regBody)
+        guard let url = login.urlRequest?.url else {
+            return
+        }
+        
+        testURL(url, Constants.loginPath)
+        testAPIRequestTransform(myRequest: login, httpMethod: "POST", headers: regHeaders, body: regBody)
     }
     
     func testSetUserInfoRequestData() {
@@ -82,6 +92,11 @@ class RESTClientTests: XCTestCase {
         let headers = [Constants.contentType : Constants.contentTypeJSON,
                       Constants.accessTokenKey : accessToken]
         
+        guard let myUrl = setUserInfo.urlRequest?.url else {
+            return
+        }
+        
+        testURL(myUrl, Constants.setUserInfoPath)
         testAPIRequestTransform(myRequest: setUserInfo, httpMethod: "PUT", headers: headers, body: userInfoToSet)
     }
     
@@ -93,6 +108,11 @@ class RESTClientTests: XCTestCase {
         let headers = [Constants.contentType : Constants.contentTypeJSON,
                        Constants.accessTokenKey : accessToken]
         
+        guard let url = getUserInfo.urlRequest?.url else {
+            return
+        }
+        
+        testURL(url, Constants.getUserInfoPath)
         testAPIRequestTransform(myRequest: getUserInfo, httpMethod: "GET", headers: headers, body: nil)
     }
     
@@ -102,8 +122,27 @@ class RESTClientTests: XCTestCase {
         
         let headers = [Constants.contentType : Constants.contentTypeJSON, Constants.accessTokenKey : token]
         
+        guard let url = logout.urlRequest?.url else {
+            return
+        }
+        
+        testURL(url, Constants.logoutPath)
         testAPIRequestTransform(myRequest: logout, httpMethod: "GET", headers: headers, body: nil)
     }
+    
+    func testURL(_ url: URL, _ expectedFunctionPath: String) {
+        let urlString = url.absoluteString
+        
+        // Check baseurl
+        XCTAssert(urlString.contains(Constants.baseUrl))
+        
+        // Check https
+        XCTAssert(urlString.contains("https://"))
+        
+        // Check function path
+        XCTAssert(urlString.contains(expectedFunctionPath))
+    }
+    
         
     func testPerformanceExample() {
         // This is an example of a performance test case.

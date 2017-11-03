@@ -69,7 +69,7 @@ class IntegrationTests: XCTestCase {
         }
     }
     
-    func testLogin() {
+    func testChain() {
         let loginExpectation = expectation(description: "LoginExpectation")
         let request = RESTRequest(API.login(email: "bilebile@abv.bg", password: "sdfsdsfs"))
         
@@ -87,6 +87,8 @@ class IntegrationTests: XCTestCase {
                 XCTAssert(false)
             }
         }
+        
+        wait(for: [loginExpectation], timeout: 30.0)
     }
 
     func testRegistration() {
@@ -107,16 +109,4 @@ class IntegrationTests: XCTestCase {
         
         wait(for: [exp], timeout: 5.0)
     }
-    
-    func testChain() {
-        
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }

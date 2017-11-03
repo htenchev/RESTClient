@@ -75,7 +75,12 @@ extension API : RequestInputValidation {
     
     private func validateEmail(email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        return NSPredicate(format: "%@", emailRegex).evaluate(with: email)
+        
+        guard let regex = try? NSRegularExpression(pattern: emailRegex, options: []) else {
+            return false
+        }
+        
+        return regex.matches(in: email, options: [], range: NSMakeRange(0, email.count)).count > 0
     }
     
     private func validatePassword(password: String) -> Bool {
