@@ -22,7 +22,6 @@ enum API {
 // the request is successful.
 protocol Requestable {
     var urlRequest: URLRequest? { get }
-    var operation: API { get }
 }
 
 // Our API conforms to the requestable protocol, we currently map
@@ -56,10 +55,6 @@ extension API : Requestable {
         
         return request
      }
-    
-    var operation: API {
-        return self
-    }
     
     fileprivate var path: String {
         switch self {
@@ -103,7 +98,7 @@ extension API : Requestable {
     }
     
     fileprivate var httpHeaders: [String: String]? {
-        var headers = [Constants.contentType: Constants.contentTypeJSON]
+        var headers = [String: String]()
         
         switch self {
         case .logout(let accessToken),

@@ -25,47 +25,28 @@ class IntegrationTests: XCTestCase {
     func testLogout(expectation: XCTestExpectation) {
         let request = RESTRequest(API.logout(accessToken: accessToken))
         
-        request.execute() { (op) in
-            if case OperationResult.logout = op {
-                expectation.fulfill()
-            } else if case OperationResult.error(let errorMessage) = op {
-                XCTAssert(false, errorMessage)
-            } else {
-                XCTAssert(false)
-            }
+        request.execute() { (result, err)  in
+            XCTAssertNil(err, err!.description)
+            expectation.fulfill()
         }
     }
     
     func testGetAvatar(expectation: XCTestExpectation) {
         let request = RESTRequest(API.setUserAvatar(objectId: loggedInUserId, accessToken: accessToken, url: "https://sitez.bg/cool1.jpg"))
-        
-        request.execute() { (op) in
 
-            if case OperationResult.setAvatar(let avatarResult) = op {
-                XCTAssert(avatarResult.isValid)
-            } else if case OperationResult.error(let errorMessage) = op {
-                XCTAssert(false, errorMessage)
-            }
-            else {
-                XCTAssert(false)
-            }
+        request.execute() { result, err in
+            XCTAssertNil(err, err!.description)
+            XCTAssert(avatarResult.isValid)
         }
     }
-    
+
     func testSetAvatar(expectation: XCTestExpectation) {
         let request = RESTRequest(API.setUserAvatar(objectId: loggedInUserId, accessToken: accessToken, url: "https://sitez.bg/cool1.jpg"))
-        
-        request.execute() { [weak self] (op) in
+
+        request.execute() { [weak self] (result, err) in
+            XCTAssertNil(err, err!.description)
             
-            if case OperationResult.setAvatar(let avatarResult) = op {
-                XCTAssert(avatarResult.isValid)
-                self?.testGetAvatar(expectation: expectation)
-            } else if case OperationResult.error(let errorMessage) = op {
-                XCTAssert(false, errorMessage)
-            }
-            else {
-                XCTAssert(false)
-            }
+            self?.testGetAvatar(expectation: expectation)
         }
     }
     
@@ -73,19 +54,9 @@ class IntegrationTests: XCTestCase {
         let loginExpectation = expectation(description: "LoginExpectation")
         let request = RESTRequest(API.login(email: "bilebile@abv.bg", password: "sdfsdsfs"))
         
-        request.execute() { [weak self] (op) in
-            switch op {
-            case .error(let errorMessage):
-                XCTAssert(false)
-                print("Error: \(errorMessage)")
-            case .login(let loginResult):
-                print(">>> Login: User-token [\(loginResult.userToken)]")
-                
-                self?.testSetAvatar(expectation: loginExpectation)
-            default:
-                print("")
-                XCTAssert(false)
-            }
+        request.execute() { [weak self] (result, err) in
+            XCTAssertNil(err, err!.description)
+            self?.testSetAvatar(expectation: loginExpectation)
         }
         
         wait(for: [loginExpectation], timeout: 30.0)
@@ -94,16 +65,8 @@ class IntegrationTests: XCTestCase {
     func testRegistration() {
         let exp = expectation(description: "RegExpectation")
         
-        RESTRequest(API.register(email: "bilebile@abv.bg", password: "sdfsdsfs", username: "userneim")).execute() { (op) in
-            print("Result:\(op)")
-            
-            switch op {
-            case .error:
-                XCTAssert(false)
-            default:
-                print("Non error")
-            }
-            
+        RESTRequest(API.register(email: "bilebile@abv.bg", password: "sdfsdsfs", username: "userneim")).execute() { result, err in
+            XCTAssertNil(err)
             exp.fulfill()
         }
         
