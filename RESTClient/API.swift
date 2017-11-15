@@ -56,6 +56,7 @@ extension API : Requestable {
         return request
      }
     
+    // This is the function path after the base url
     fileprivate var path: String {
         switch self {
         case .login:
@@ -74,6 +75,7 @@ extension API : Requestable {
         }
     }
     
+    // The http payload (e.g. for POST requests)
     fileprivate var httpBody: [String: String]? {
         var result: [String: String] = [:]
         
@@ -114,6 +116,7 @@ extension API : Requestable {
         return headers
     }
     
+    // HTTP verb for each type of request
     fileprivate var httpMethod: String {
         switch self {
         case .login, .register:

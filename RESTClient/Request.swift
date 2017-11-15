@@ -14,6 +14,46 @@ enum OperationResult {
     case logout(LogoutResult)
     case setAvatar(SetAvatarResult)
     case getAvatar(GetAvatarResult)
+    
+    func registrationResult() -> RegistrationResult? {
+        if case .register(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
+    func loginResult() -> LoginResult? {
+        if case .login(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
+
+    func logoutResult() -> LogoutResult? {
+        if case .logout(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
+
+    func setAvatarResult() -> SetAvatarResult? {
+        if case .setAvatar(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
+
+    func getAvatarResult() -> GetAvatarResult? {
+        if case .getAvatar(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
 }
 
 struct RequestError {
@@ -53,7 +93,7 @@ extension APIRequest {
                 return
             }
             
-            prettyPrintData(data: mydata)
+            //prettyPrintData(data: mydata)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(nil, RequestError(description: "Unable to cast response."))

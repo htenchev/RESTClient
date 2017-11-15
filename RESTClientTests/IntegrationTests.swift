@@ -35,8 +35,9 @@ class IntegrationTests: XCTestCase {
         let request = RESTRequest(API.setUserAvatar(objectId: loggedInUserId, accessToken: accessToken, url: "https://sitez.bg/cool1.jpg"))
 
         request.execute() { result, err in
+            XCTAssertNotNil(result)
             XCTAssertNil(err, err!.description)
-            XCTAssert(avatarResult.isValid)
+            XCTAssert(result!.setAvatarResult()!.isValid)
         }
     }
 

@@ -36,9 +36,8 @@ class RESTClientTests: XCTestCase {
             XCTAssertEqual(method, httpMethod)
         }
         
-        if let payload = request.httpBody, let correctPayloadJSON = body {
-            guard let myPayloadData = try? JSONSerialization.data(withJSONObject: payload, options: []),
-            let correctPayloadData = try? JSONSerialization.data(withJSONObject: correctPayloadJSON, options: []) else {
+        if let myPayloadData = request.httpBody, let correctPayloadJSON = body {
+            guard let correctPayloadData = try? JSONSerialization.data(withJSONObject: correctPayloadJSON, options: []) else {
                 XCTAssert(false)
                 return
             }
@@ -56,7 +55,7 @@ class RESTClientTests: XCTestCase {
         let password = "sdfsdf"
         let username = "User Name"
         let registration = API.register(email: mail, password: password, username: username)
-        let regHeaders = [Constants.contentType : Constants.contentTypeJSON]
+        let regHeaders = [String: String]()
         let regBody = [Constants.emailKey : mail, Constants.passwordKey : password, Constants.usernameKey : username]
         
         guard let url = registration.urlRequest?.url else {
@@ -71,7 +70,7 @@ class RESTClientTests: XCTestCase {
         let mail = "userttt@mailll.bg"
         let password = "sdfsdf"
         let login = API.login(email: mail, password: password)
-        let regHeaders = [Constants.contentType : Constants.contentTypeJSON]
+        let regHeaders = [String: String]()
         let regBody = [Constants.loginKey : mail, Constants.passwordKey : password]
         
         guard let url = login.urlRequest?.url else {
@@ -88,8 +87,7 @@ class RESTClientTests: XCTestCase {
         let url = "http://mydomain.bg/mypic.jpg"
         let setUserInfo = API.setUserAvatar(objectId: objectId, accessToken: accessToken, url: url)
         let userInfoToSet = [Constants.avatarURLKey: url]
-        let headers = [Constants.contentType : Constants.contentTypeJSON,
-                      Constants.accessTokenKey : accessToken]
+        let headers = [Constants.accessTokenKey : accessToken]
         
         guard let myUrl = setUserInfo.urlRequest?.url else {
             return
@@ -104,22 +102,20 @@ class RESTClientTests: XCTestCase {
         let accessToken = "sjkdfhskdf-3f-s-f-adjhbajskdhagsjd"
         let getUserInfo = API.getUserAvatar(objectId: objectId, accessToken: accessToken)
         
-        let headers = [Constants.contentType : Constants.contentTypeJSON,
-                       Constants.accessTokenKey : accessToken]
-        
         guard let url = getUserInfo.urlRequest?.url else {
+            XCTFail()
             return
         }
         
         testURL(url, "/users/")
-        testAPIRequestTransform(myRequest: getUserInfo, httpMethod: "GET", headers: headers, body: nil)
+        testAPIRequestTransform(myRequest: getUserInfo, httpMethod: "GET", headers: nil, body: nil)
     }
     
     func testLogoutRequestData() {
         let token = "SKJHDFSDF23-F2-3D-23D23D2FSG"
         let logout = API.logout(accessToken: token)
         
-        let headers = [Constants.contentType : Constants.contentTypeJSON, Constants.accessTokenKey : token]
+        let headers = [Constants.accessTokenKey : token]
         
         guard let url = logout.urlRequest?.url else {
             return
