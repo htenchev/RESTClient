@@ -93,7 +93,7 @@ extension APIRequest {
                 return
             }
             
-            //prettyPrintData(data: mydata)
+            prettyPrintData(data: mydata)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(nil, RequestError(description: "Unable to cast response."))
@@ -105,10 +105,6 @@ extension APIRequest {
             if httpResponse.statusCode != 200 {
                 completion(nil, RequestError(description: "HTTP Error: \(httpResponse.statusCode)"))
                 return
-            }
-            
-            if (mydata.isEmpty) {
-                completion(nil, RequestError(description: "Empty data"))
             }
             
             completion(self.modelFromData(data: mydata), nil)
@@ -126,7 +122,7 @@ struct RESTRequest : APIRequest {
     // Convert data to JSON an let the ModelType classes handle parsing
     func modelFromData(data: Data) -> OperationResult? {
         guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
-            let jsonValue = jsonObject as? JSONValue else {
+            let jsonValue = jsonObject as? JSONDictionary else {
                 return nil//.error("Bad json in modelFromData(:_:_)")
         }
         

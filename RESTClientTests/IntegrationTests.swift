@@ -34,10 +34,16 @@ class IntegrationTests: XCTestCase {
     func testGetAvatar(expectation: XCTestExpectation) {
         let request = RESTRequest(API.setUserAvatar(objectId: loggedInUserId, accessToken: accessToken, url: "https://sitez.bg/cool1.jpg"))
 
-        request.execute() { result, err in
-            XCTAssertNotNil(result)
+        request.execute() { [weak self] result, err in
             XCTAssertNil(err, err!.description)
-            XCTAssert(result!.setAvatarResult()!.isValid)
+            
+            guard let res = result, let avatarRes = res.getAvatarResult() else {
+                XCTFail("nil result")
+                return
+            }
+            
+            XCTAssert(avatarRes.isValid)
+            self?.testLogout(expectation: expectation)
         }
     }
 
@@ -46,7 +52,6 @@ class IntegrationTests: XCTestCase {
 
         request.execute() { [weak self] (result, err) in
             XCTAssertNil(err, err!.description)
-            
             self?.testGetAvatar(expectation: expectation)
         }
     }
@@ -57,10 +62,18 @@ class IntegrationTests: XCTestCase {
         
         request.execute() { [weak self] (result, err) in
             XCTAssertNil(err, err!.description)
+            
+            guard let r = result, let loginData = r.loginResult() else {
+                XCTFail()
+                return
+            }
+            
+            self?.loggedInUserId = loginData.objectId
+            self?.accessToken = loginData.userToken
             self?.testSetAvatar(expectation: loginExpectation)
         }
         
-        wait(for: [loginExpectation], timeout: 30.0)
+        wait(for: [loginExpectation], timeout: 60.0)
     }
 
     func testRegistration() {

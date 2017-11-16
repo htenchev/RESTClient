@@ -100,7 +100,7 @@ extension API : Requestable {
     }
     
     fileprivate var httpHeaders: [String: String]? {
-        var headers = [String: String]()
+        var headers: [String: String] = [Constants.contentType: Constants.contentTypeJSON]
         
         switch self {
         case .logout(let accessToken),
