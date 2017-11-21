@@ -32,7 +32,7 @@ class IntegrationTests: XCTestCase {
     }
     
     func testGetAvatar(expectation: XCTestExpectation) {
-        let request = RESTRequest(API.setUserAvatar(objectId: loggedInUserId, accessToken: accessToken, url: "https://sitez.bg/cool1.jpg"))
+        let request = RESTRequest(API.getUserAvatar(objectId: loggedInUserId, accessToken: accessToken))
 
         request.execute() { [weak self] result, err in
             XCTAssertNil(err, err!.description)
@@ -72,7 +72,7 @@ class IntegrationTests: XCTestCase {
             self?.accessToken = loginData.userToken
             self?.testSetAvatar(expectation: loginExpectation)
         }
-        
+                
         wait(for: [loginExpectation], timeout: 60.0)
     }
 

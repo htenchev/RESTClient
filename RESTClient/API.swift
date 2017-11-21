@@ -24,6 +24,8 @@ protocol Requestable {
     var urlRequest: URLRequest? { get }
 }
 
+Chain().first(API.login(email: "sdfsdfsd", password: "sdfsdf")) { loginRes in ...}.then
+
 // Our API conforms to the requestable protocol, we currently map
 // each operation type to a Model object type. This extension is
 // split into different methods for function paths, http payload,
@@ -129,4 +131,89 @@ extension API : Requestable {
         }
     }
 }
+
+enum Result {
+    case success(OperationResult)
+    case error(RequestError)
+}
+
+protocol RequestPerformer {
+    func modelFromData(data: Data) -> OperationResult?
+    func execute(completion: @escaping (Result) -> Void)
+}
+
+extension API : RequestPerformer {
+    // Convert data to JSON an let the ModelType classes handle parsing
+    func modelFromData(data: Data) -> OperationResult? {
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
+            let jsonValue = jsonObject as? JSONDictionary else {
+                return nil//.error("Bad json in modelFromData(:_:_)")
+        }
+        
+        switch self {
+        case .login:
+            return OperationResult.login(LoginResult(data: jsonValue))
+        case .register:
+            return OperationResult.register(RegistrationResult(data: jsonValue))
+        case .logout:
+            return OperationResult.logout(LogoutResult(data: jsonValue))
+        case .getUserAvatar:
+            return OperationResult.setAvatar(SetAvatarResult(data: jsonValue))
+        case .setUserAvatar:
+            return OperationResult.getAvatar(GetAvatarResult(data: jsonValue))
+        }
+    }
+    
+    func execute(completion: @escaping (Result) -> Void) {
+        guard let urlRequest = self.urlRequest else {
+            completion(Result.error(RequestError(description: "Bad url request")))
+            return
+        }
+        
+        guard let url = urlRequest.url else {
+            completion(Result.error(RequestError(description: "Bad url")))
+            return
+        }
+        
+        print("Request for \(url.absoluteString) :")
+        
+        let task = API.urlSession.dataTask(with: urlRequest, completionHandler: {
+            (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            guard let mydata = data else {
+                completion(Result.error(RequestError(description: "Cannot parse data.")))
+                return
+            }
+            
+            prettyPrintData(data: mydata)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(Result.error(RequestError(description: "Unable to cast response.")))
+                return
+            }
+            
+            print("Status \(httpResponse.statusCode)")
+            
+            if httpResponse.statusCode != 200 {
+                completion(Result.error(RequestError(description: "HTTP Error: \(httpResponse.statusCode)")))
+                return
+            }
+            
+            guard let result = self.modelFromData(data: mydata) else {
+                completion(Result.error(RequestError(description: "sdfsdf")))
+                return
+            }
+            
+            completion(Result.success(result))
+        })
+        
+        task.resume()
+    }
+    
+    private static let urlSession = { () -> URLSession in
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.httpAdditionalHeaders = [Constants.contentType: Constants.contentTypeJSON]
+        return URLSession(configuration: configuration)
+    }()
+}
+
 
