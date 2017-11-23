@@ -182,8 +182,12 @@ struct RequestError {
     let description: String
 }
 
+protocol Chainer {
+    func add(_ operation: API)
+}
 
 typealias RequestCompletion = (OperationResult?, RequestError?) -> Bool
+typealias ChainedRequestCompletion = (OperationResult?, RequestError?, Chainer) -> Bool
 
 protocol RequestPerformer {
     func modelFromData(data: Data) -> OperationResult?
@@ -264,54 +268,56 @@ extension API : RequestPerformer {
     }()
 }
 
-class RequestChain {
-    func add(_ operation: API, completion: @escaping RequestCompletion) -> RequestChain {
-        operations.append((operation, completion))
+class RequestChain : Chainer {
+    typealias FirstCompletion = (Chainer) -> ()
+    
+    func add(_ operation: API) {
+        self.operation = operation
+    }
+    
+    func firstly(completion: @escaping FirstCompletion) -> RequestChain {
+        firstCompletion = completion
+        return self
+    }
+    
+    func then(completion: @escaping ChainedRequestCompletion) -> RequestChain {
+        completions.append(completion)
         return self
     }
     
     func reset() {
-        operations.removeAll()
+        completions.removeAll()
+        operation = nil
+        firstCompletion = { _ in }
     }
     
-    private func nextOperation() -> OperationData? {
-        if operations.isEmpty {
-            return nil
-        }
-        
-        return operations.removeFirst()
-    }
-    
-    private func consumeOperation(op: OperationData) {
-        let completion: RequestCompletion = { [weak self] res, err in
-            print(">>>>>>>>>> Calling completion for \(op.0)")
-            let shouldContinue = op.1(res, err) // call completion
-            
-            guard let next = self?.nextOperation() else {
-                print(">>>>>>>>>> End chain")
-                return false
-            }
-            
-            print(">>>>>>>>>> (Next operation is\(next.0))")
-            self?.consumeOperation(op: next)
-            
-            return shouldContinue
-        }
-        
-        print(">>>>>>>>>> Executing \(op.0)")
-        op.0.execute(completion: completion)
-    }
-    
-    func execute() {
-        guard let next = nextOperation() else {
+    private func executeChain() {
+        guard let currOperation = operation else {
             return
         }
         
-        print(">>>>>>>>>> Begin chain:")
-        consumeOperation(op: next)
+        let outerCompletion: RequestCompletion = { [weak self] result, err in
+            guard let this = self else {
+                return false
+            }
+            
+            let userCompletion = this.completions.removeFirst()
+            let result = userCompletion(result, err, this)
+            this.executeChain()
+            
+            return result
+        }
+        
+        currOperation.execute(completion: outerCompletion)
     }
     
-    typealias OperationData = (API, RequestCompletion)
-    private var operations: [OperationData] = []
+    func execute() {
+        firstCompletion(self)
+        executeChain()
+    }
+
+    private var firstCompletion: FirstCompletion = { _ in }
+    private var completions: [ChainedRequestCompletion] = []
+    private var operation: API?
 }
 

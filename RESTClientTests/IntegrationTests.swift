@@ -22,40 +22,61 @@ class IntegrationTests: XCTestCase {
     
     func testRequestChain() {
         let loginExpectation = expectation(description: "LoginExpectation")
-        var token = ""
-        var userId = ""
         let chain = RequestChain()
+        var token = ""
+        var objectId = ""
         
-        chain.add(.login(email: "bilebile@abv.bg", password: "sdfsdsfs")) { (res, err) in
-            if let result = res,
-                let loginRes = result.loginResult() {
-                token = loginRes.userToken
-                userId = loginRes.objectId
-            } else {
+        chain.firstly { chainer in
+            chainer.add(.login(email: "bilebile@abv.bg", password: "sdfsdsfs"))
+        }.then { (res, err, chainer) in
+            guard let loginRes = res?.loginResult() else {
                 return false
             }
             
+            token = loginRes.userToken
+            objectId = loginRes.objectId
+            chainer.add(.setUserAvatar(objectId: objectId, accessToken: token, url: "https://sitez.bg/cool1.jpg"))
+            
             return true
-        }.add(.setUserAvatar(objectId: userId, accessToken: token, url: "https://sitez.bg/cool1.jpg")) { res, err in
-            print("Set user avatar")
-            return true;
-        }.add(.getUserAvatar(objectId: userId, accessToken: token)) { (res, err) in
-            print("Got user avatar")
+        }.then { (err, res, chainer) in
+            chainer.add(.logout(accessToken: token))
             return true
-        }.add(.logout(accessToken: token)) { (res, err) in
-            print("Logout")
+        }.then { (err, res, chainer) in
             loginExpectation.fulfill()
             return true
         }.execute()
         
-        wait(for: [loginExpectation], timeout: 60.0)
+//        chain.add(.login(email: "bilebile@abv.bg", password: "sdfsdsfs")) { (res, err) in
+//            if let result = res,
+//                let loginRes = result.loginResult() {
+//                token = loginRes.userToken
+//                userId = loginRes.objectId
+//            } else {
+//                return false
+//            }
+//
+//            return true
+//        }.add(.setUserAvatar(objectId: userId, accessToken: token, url: "https://sitez.bg/cool1.jpg")) { res, err in
+//            print("Set user avatar")
+//            return true;
+//        }.add(.getUserAvatar(objectId: userId, accessToken: token)) { (res, err) in
+//            print("Got user avatar")
+//            return true
+//        }.add(.logout(accessToken: token)) { (res, err) in
+//            print("Logout")
+//            loginExpectation.fulfill()
+//            return true
+//        }.execute()
+        
+        wait(for: [loginExpectation], timeout: 260.0)
     }
 
     func testRegistration() {
         let exp = expectation(description: "RegExpectation")
         
+        // Already registered
         API.register(email: "bilebile@abv.bg", password: "sdfsdsfs", username: "userneim").execute() { result, err in
-            XCTAssertNil(err)
+            XCTAssertNotNil(err)
             exp.fulfill()
             return true
         }
