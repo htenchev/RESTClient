@@ -12,9 +12,34 @@ import UIKit
 protocol ModelType {
     associatedtype ConvertedType
     static func create(data: JSONValue) -> ConvertedType;
+    func validate() -> [ModelError]
+}
+
+enum ModelError : Int {
+    case missingToken
+    case missingObjectId
+    case missingEmail
+    case missingAvatarURL
+    case missingUsername
+    case badURLDomain
+    case badAvatarExtension
 }
 
 struct LoginResult : ModelType {
+    func validate() -> [ModelError] {
+        var result: [ModelError] = []
+        
+        if userToken.isEmpty {
+            result.append(.missingToken)
+        }
+        
+        if objectId.isEmpty {
+            result.append(.missingObjectId)
+        }
+        
+        return result
+    }
+    
     let userToken: String
     let objectId: String
     
@@ -38,6 +63,24 @@ struct LoginResult : ModelType {
 }
 
 struct RegistrationResult : ModelType {
+    func validate() -> [ModelError] {
+        var result: [ModelError] = []
+        
+        if objectId.isEmpty {
+            result.append(.missingObjectId)
+        }
+        
+        if email.isEmpty {
+            result.append(.missingEmail)
+        }
+        
+        if username.isEmpty {
+            result.append(.missingUsername)
+        }
+        
+        return result
+    }
+    
     let email: String
     let objectId: String
     let username: String
@@ -65,6 +108,10 @@ struct RegistrationResult : ModelType {
 }
 
 struct LogoutResult : ModelType {
+    func validate() -> [ModelError] {
+        return []
+    }
+    
     init(data: JSONValue) {
         
     }
@@ -75,6 +122,24 @@ struct LogoutResult : ModelType {
 }
 
 struct SetAvatarResult : ModelType {
+    func validate() -> [ModelError] {
+        var result: [ModelError] = []
+        
+        if avatarURL.isEmpty {
+            result.append(.missingAvatarURL)
+        }
+        
+        if !avatarURL.contains(".bg") {
+            result.append(.badURLDomain)
+        }
+        
+        if !avatarURL.hasSuffix(".jpg") {
+            result.append(.badAvatarExtension)
+        }
+        
+        return result
+    }
+    
     let avatarURL: String
 
     init(data: JSONValue) {
@@ -87,9 +152,6 @@ struct SetAvatarResult : ModelType {
         avatarURL = avatarURLValue
     }
     
-    var isValid: Bool {
-        return avatarURL.contains(".bg") && avatarURL.contains(".jpg")
-    }
     
     static func create(data: JSONValue) -> SetAvatarResult {
         return SetAvatarResult(data: data)
@@ -97,6 +159,24 @@ struct SetAvatarResult : ModelType {
 }
 
 struct GetAvatarResult : ModelType {
+    func validate() -> [ModelError] {
+        var result: [ModelError] = []
+        
+        if avatarURL.isEmpty {
+            result.append(.missingAvatarURL)
+        }
+        
+        if !avatarURL.contains(".bg") {
+            result.append(.badURLDomain)
+        }
+        
+        if !avatarURL.hasSuffix(".jpg") {
+            result.append(.badAvatarExtension)
+        }
+        
+        return result
+    }
+
     let avatarURL: String
     
     init(data: JSONValue) {
@@ -107,10 +187,6 @@ struct GetAvatarResult : ModelType {
         }
         
         avatarURL = avatarURLValue
-    }
-    
-    var isValid: Bool {
-        return avatarURL.contains(".bg") && avatarURL.contains(".jpg")
     }
     
     static func create(data: JSONValue) -> GetAvatarResult {
