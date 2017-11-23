@@ -12,7 +12,7 @@ import UIKit
 protocol ModelType {
     associatedtype ConvertedType
     static func create(data: JSONValue) -> ConvertedType;
-    func validate() -> [ModelError]
+    func validate() -> (Bool, [ModelError])
 }
 
 enum ModelError : Int {
@@ -26,18 +26,18 @@ enum ModelError : Int {
 }
 
 struct LoginResult : ModelType {
-    func validate() -> [ModelError] {
-        var result: [ModelError] = []
+    func validate() -> (Bool, [ModelError]) {
+        var errors: [ModelError] = []
         
         if userToken.isEmpty {
-            result.append(.missingToken)
+            errors.append(.missingToken)
         }
         
         if objectId.isEmpty {
-            result.append(.missingObjectId)
+            errors.append(.missingObjectId)
         }
         
-        return result
+        return (errors.isEmpty, errors)
     }
     
     let userToken: String
@@ -63,22 +63,22 @@ struct LoginResult : ModelType {
 }
 
 struct RegistrationResult : ModelType {
-    func validate() -> [ModelError] {
-        var result: [ModelError] = []
+    func validate() -> (Bool, [ModelError]) {
+        var errors: [ModelError] = []
         
         if objectId.isEmpty {
-            result.append(.missingObjectId)
+            errors.append(.missingObjectId)
         }
         
         if email.isEmpty {
-            result.append(.missingEmail)
+            errors.append(.missingEmail)
         }
         
         if username.isEmpty {
-            result.append(.missingUsername)
+            errors.append(.missingUsername)
         }
         
-        return result
+        return (errors.isEmpty, errors)
     }
     
     let email: String
@@ -108,8 +108,8 @@ struct RegistrationResult : ModelType {
 }
 
 struct LogoutResult : ModelType {
-    func validate() -> [ModelError] {
-        return []
+    func validate() -> (Bool, [ModelError]) {
+        return (true, [])
     }
     
     init(data: JSONValue) {
@@ -122,22 +122,22 @@ struct LogoutResult : ModelType {
 }
 
 struct SetAvatarResult : ModelType {
-    func validate() -> [ModelError] {
-        var result: [ModelError] = []
+    func validate() -> (Bool, [ModelError]) {
+        var errors: [ModelError] = []
         
         if avatarURL.isEmpty {
-            result.append(.missingAvatarURL)
+            errors.append(.missingAvatarURL)
         }
         
         if !avatarURL.contains(".bg") {
-            result.append(.badURLDomain)
+            errors.append(.badURLDomain)
         }
         
         if !avatarURL.hasSuffix(".jpg") {
-            result.append(.badAvatarExtension)
+            errors.append(.badAvatarExtension)
         }
         
-        return result
+        return (errors.isEmpty, errors)
     }
     
     let avatarURL: String
@@ -159,22 +159,22 @@ struct SetAvatarResult : ModelType {
 }
 
 struct GetAvatarResult : ModelType {
-    func validate() -> [ModelError] {
-        var result: [ModelError] = []
+    func validate() -> (Bool, [ModelError]) {
+        var errors: [ModelError] = []
         
         if avatarURL.isEmpty {
-            result.append(.missingAvatarURL)
+            errors.append(.missingAvatarURL)
         }
         
         if !avatarURL.contains(".bg") {
-            result.append(.badURLDomain)
+            errors.append(.badURLDomain)
         }
         
         if !avatarURL.hasSuffix(".jpg") {
-            result.append(.badAvatarExtension)
+            errors.append(.badAvatarExtension)
         }
         
-        return result
+        return (errors.isEmpty, errors)
     }
 
     let avatarURL: String

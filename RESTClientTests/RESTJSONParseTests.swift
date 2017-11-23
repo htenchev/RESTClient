@@ -138,17 +138,17 @@ class RequestDataTests: XCTestCase {
         // Test missing mail
         jsonDict.removeValue(forKey: Constants.emailKey)
         var reg = RegistrationResult(data: jsonDict)
-        XCTAssert(reg.email == "")
+        XCTAssertTrue(reg.validate().0)
         
         // Test missing user id
         jsonDict.removeValue(forKey: Constants.objectIdKey)
         reg = RegistrationResult(data: jsonDict)
-        XCTAssert(reg.objectId == "")
+        XCTAssertTrue(reg.validate().0)
         
         // Test missing username
         jsonDict.removeValue(forKey: Constants.usernameKey)
         reg = RegistrationResult(data: jsonDict)
-        XCTAssert(reg.username == "")
+        XCTAssertTrue(reg.validate().0)
     }
     
     func testLoginResultParsing() {
@@ -168,12 +168,12 @@ class RequestDataTests: XCTestCase {
         // Test missing aceessToken
         jsonDict.removeValue(forKey: Constants.accessTokenKey)
         var login = LoginResult(data: jsonDict)
-        XCTAssert(login.userToken == "")
+        XCTAssertTrue(login.validate().0)
         
         // Test missing user id
         jsonDict.removeValue(forKey: Constants.objectIdKey)
         login = LoginResult(data: jsonDict)
-        XCTAssert(login.objectId == "")
+        XCTAssertTrue(login.validate().0)
     }
     
     func testSetAvatarResultParsing() {
@@ -191,7 +191,7 @@ class RequestDataTests: XCTestCase {
         // Test with a missing avatar field
         jsonDict.removeValue(forKey: Constants.avatarURLKey)
         let avatarRes = SetAvatarResult(data: jsonDict)
-        XCTAssertEqual(avatarRes.avatarURL, "")
+        XCTAssertTrue(avatarRes.validate().0)
     }
     
     func testGetAvatarRеsultParsing() {
@@ -209,7 +209,7 @@ class RequestDataTests: XCTestCase {
         // Test with a missing avatar field
         jsonDict.removeValue(forKey: Constants.avatarURLKey)
         let avatarRes = GetAvatarResult(data: jsonDict)
-        XCTAssertEqual(avatarRes.avatarURL, "")
+        XCTAssertTrue(avatarRes.validate().0)
     }
     
     func testPerformanceExample() {

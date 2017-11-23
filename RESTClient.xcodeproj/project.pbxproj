@@ -38,8 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AB07E17C1F8F9666006F64BC /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
-		AB07E17D1F8F9666006F64BC /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		AB0C48CE1F8B998C00C5209E /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		AB255A6C1F792FB1001F9425 /* RESTClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RESTClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB255A6F1F792FB1001F9425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,8 +78,6 @@
 		AB07E17B1F8F9666006F64BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AB07E17D1F8F9666006F64BC /* ReactiveCocoa.framework */,
-				AB07E17C1F8F9666006F64BC /* ReactiveSwift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

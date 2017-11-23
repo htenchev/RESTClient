@@ -20,7 +20,7 @@ class IntegrationTests: XCTestCase {
     }
     
     
-    func testChain() {
+    func testRequestChain() {
         let loginExpectation = expectation(description: "LoginExpectation")
         var token = ""
         var userId = ""
