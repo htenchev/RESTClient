@@ -83,28 +83,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RESTClientTests/IntegrationTests.swift"
-            timestampString = "532520473.522646"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "RESTClient/Request.swift"
-            timestampString = "532520473.523356"
+            timestampString = "533054801.906366"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "load(urlSession:requestable:completion:)"
-            landmarkType = "7">
+            startingLineNumber = "62"
+            endingLineNumber = "62">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -137,20 +121,6 @@
                   offsetFromSymbolStart = "174">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RESTClientTests/IntegrationTests.swift"
-            timestampString = "532520473.524079"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -256,11 +226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClient/API.swift"
-            timestampString = "532520473.525495"
+            timestampString = "533125095.571319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "httpHeaders"
             landmarkType = "24">
          </BreakpointContent>
@@ -271,78 +241,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RESTClientTests/IntegrationTests.swift"
-            timestampString = "532520473.525704"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "testLogout(expectation:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RESTClientTests/IntegrationTests.swift"
-            timestampString = "532520473.526348"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "testChain()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "RESTClientTests.IntegrationTests.testChain() -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520231.366127"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "436">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testChain() -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520231.374141"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "194">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "RESTClient/Request.swift"
-            timestampString = "532520473.526712"
+            timestampString = "533054801.906911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "load(urlSession:requestable:completion:)"
-            landmarkType = "7">
+            startingLineNumber = "62"
+            endingLineNumber = "62">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -384,13 +288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClient/Request.swift"
-            timestampString = "532520473.527058"
+            timestampString = "533054801.907007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "load(urlSession:requestable:completion:)"
-            landmarkType = "7">
+            startingLineNumber = "62"
+            endingLineNumber = "62">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -432,13 +334,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClient/Request.swift"
-            timestampString = "532520473.527417"
+            timestampString = "533054801.907112"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "modelFromData(data:)"
-            landmarkType = "7">
+            startingLineNumber = "62"
+            endingLineNumber = "62">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -480,13 +380,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClient/Request.swift"
-            timestampString = "532520473.527759"
+            timestampString = "533054801.907217"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "modelFromData(data:)"
-            landmarkType = "7">
+            startingLineNumber = "62"
+            endingLineNumber = "62">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -524,175 +422,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RESTClientTests/IntegrationTests.swift"
-            timestampString = "532520473.528047"
+            timestampString = "533125095.571622"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "testSetAvatar(expectation:)"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "testChain()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testSetAvatar(expectation: __ObjC.XCTestExpectation) -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520231.379739"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "215">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #1 : @autoclosure () throws -&gt; Swift.Optional&lt;Any&gt; in closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testSetAvatar(expectation: __ObjC.XCTestExpectation) -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520231.383248"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "41">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #2 : @autoclosure () -&gt; Swift.String in closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testSetAvatar(expectation: __ObjC.XCTestExpectation) -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520231.386217"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RESTClientTests/IntegrationTests.swift"
-            timestampString = "532520473.528356"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "testGetAvatar(expectation:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testGetAvatar(expectation: __ObjC.XCTestExpectation) -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520294.393925"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "1513">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #3 : @autoclosure () throws -&gt; Swift.Bool in closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testGetAvatar(expectation: __ObjC.XCTestExpectation) -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520294.406247"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RESTClientTests/IntegrationTests.swift"
-            timestampString = "532520473.528639"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "testLogout(expectation:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testLogout(expectation: __ObjC.XCTestExpectation) -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520474.795123"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "183">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #1 : @autoclosure () throws -&gt; Swift.Optional&lt;Any&gt; in closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testLogout(expectation: __ObjC.XCTestExpectation) -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520474.800631"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "41">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "implicit closure #2 : @autoclosure () -&gt; Swift.String in closure #1 (Swift.Optional&lt;RESTClientTests.OperationResult&gt;, Swift.Optional&lt;RESTClientTests.RequestError&gt;) -&gt; () in RESTClientTests.IntegrationTests.testLogout(expectation: __ObjC.XCTestExpectation) -&gt; ()"
-                  moduleName = "RESTClientTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hristo.tentchev/Proj/Apps/RESTClient/RESTClientTests/IntegrationTests.swift"
-                  timestampString = "532520474.805853"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
