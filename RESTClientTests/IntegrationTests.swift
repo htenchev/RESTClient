@@ -9,9 +9,6 @@
 import XCTest
 
 class IntegrationTests: XCTestCase {
-    var loggedInUserId: String = ""
-    var accessToken: String = ""
-    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -22,66 +19,45 @@ class IntegrationTests: XCTestCase {
         super.tearDown()
     }
     
-    func testLogout(expectation: XCTestExpectation) {
-        let request = RESTRequest(API.logout(accessToken: accessToken))
-        
-        request.execute() { (result, err)  in
-            XCTAssertNil(err, err!.description)
-            expectation.fulfill()
-        }
-    }
-    
-    func testGetAvatar(expectation: XCTestExpectation) {
-        let request = RESTRequest(API.getUserAvatar(objectId: loggedInUserId, accessToken: accessToken))
-
-        request.execute() { [weak self] result, err in
-            XCTAssertNil(err, err!.description)
-            
-            guard let res = result, let avatarRes = res.getAvatarResult() else {
-                XCTFail("nil result")
-                return
-            }
-            
-            XCTAssert(avatarRes.isValid)
-            self?.testLogout(expectation: expectation)
-        }
-    }
-
-    func testSetAvatar(expectation: XCTestExpectation) {
-        let request = RESTRequest(API.setUserAvatar(objectId: loggedInUserId, accessToken: accessToken, url: "https://sitez.bg/cool1.jpg"))
-
-        request.execute() { [weak self] (result, err) in
-            XCTAssertNil(err, err!.description)
-            self?.testGetAvatar(expectation: expectation)
-        }
-    }
     
     func testChain() {
         let loginExpectation = expectation(description: "LoginExpectation")
-        let request = RESTRequest(API.login(email: "bilebile@abv.bg", password: "sdfsdsfs"))
+        var token = ""
+        var userId = ""
+        let chain = RequestChain()
         
-        request.execute() { [weak self] (result, err) in
-            XCTAssertNil(err, err!.description)
-            
-            guard let r = result, let loginData = r.loginResult() else {
-                XCTFail()
-                return
+        chain.add(.login(email: "bilebile@abv.bg", password: "sdfsdsfs")) { (res, err) in
+            if let result = res,
+                let loginRes = result.loginResult() {
+                token = loginRes.userToken
+                userId = loginRes.objectId
+            } else {
+                return false
             }
             
-            self?.loggedInUserId = loginData.objectId
-            self?.accessToken = loginData.userToken
-            self?.testSetAvatar(expectation: loginExpectation)
-        }
-                
+            return true
+        }.add(.setUserAvatar(objectId: userId, accessToken: token, url: "https://sitez.bg/cool1.jpg")) { res, err in
+            print("Set user avatar")
+            return true;
+        }.add(.getUserAvatar(objectId: userId, accessToken: token)) { (res, err) in
+            print("Got user avatar")
+            return true
+        }.add(.logout(accessToken: token)) { (res, err) in
+            print("Logout")
+            loginExpectation.fulfill()
+            return true
+        }.execute()
+        
         wait(for: [loginExpectation], timeout: 60.0)
     }
 
     func testRegistration() {
         let exp = expectation(description: "RegExpectation")
         
-        RESTRequest(API.register(email: "bilebile@abv.bg", password: "sdfsdsfs", username: "userneim")).execute() { result, err in
+        API.register(email: "bilebile@abv.bg", password: "sdfsdsfs", username: "userneim").execute() { result, err in
             XCTAssertNil(err)
             exp.fulfill()
+            return true
         }
         
         wait(for: [exp], timeout: 5.0)

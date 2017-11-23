@@ -24,8 +24,6 @@ protocol Requestable {
     var urlRequest: URLRequest? { get }
 }
 
-Chain().first(API.login(email: "sdfsdfsd", password: "sdfsdf")) { loginRes in ...}.then
-
 // Our API conforms to the requestable protocol, we currently map
 // each operation type to a Model object type. This extension is
 // split into different methods for function paths, http payload,
@@ -132,14 +130,64 @@ extension API : Requestable {
     }
 }
 
-enum Result {
-    case success(OperationResult)
-    case error(RequestError)
+enum OperationResult {
+    case register(RegistrationResult)
+    case login(LoginResult)
+    case logout(LogoutResult)
+    case setAvatar(SetAvatarResult)
+    case getAvatar(GetAvatarResult)
+    
+    func registrationResult() -> RegistrationResult? {
+        if case .register(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
+    func loginResult() -> LoginResult? {
+        if case .login(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
+    func logoutResult() -> LogoutResult? {
+        if case .logout(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
+    func setAvatarResult() -> SetAvatarResult? {
+        if case .setAvatar(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
+    
+    func getAvatarResult() -> GetAvatarResult? {
+        if case .getAvatar(let result) = self {
+            return result
+        } else {
+            return nil
+        }
+    }
 }
+
+struct RequestError {
+    let description: String
+}
+
+
+typealias RequestCompletion = (OperationResult?, RequestError?) -> Bool
 
 protocol RequestPerformer {
     func modelFromData(data: Data) -> OperationResult?
-    func execute(completion: @escaping (Result) -> Void)
+    func execute(completion: @escaping RequestCompletion)
 }
 
 extension API : RequestPerformer {
@@ -164,14 +212,14 @@ extension API : RequestPerformer {
         }
     }
     
-    func execute(completion: @escaping (Result) -> Void) {
+    func execute(completion: @escaping RequestCompletion) {
         guard let urlRequest = self.urlRequest else {
-            completion(Result.error(RequestError(description: "Bad url request")))
+            _ = completion(nil, RequestError(description: "Bad url request"))
             return
         }
         
         guard let url = urlRequest.url else {
-            completion(Result.error(RequestError(description: "Bad url")))
+            _ = completion(nil, RequestError(description: "Bad url"))
             return
         }
         
@@ -180,30 +228,30 @@ extension API : RequestPerformer {
         let task = API.urlSession.dataTask(with: urlRequest, completionHandler: {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             guard let mydata = data else {
-                completion(Result.error(RequestError(description: "Cannot parse data.")))
+                _ = completion(nil, RequestError(description: "Cannot parse data."))
                 return
             }
             
             prettyPrintData(data: mydata)
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.error(RequestError(description: "Unable to cast response.")))
+                _ = completion(nil, RequestError(description: "Unable to cast response."))
                 return
             }
             
             print("Status \(httpResponse.statusCode)")
             
             if httpResponse.statusCode != 200 {
-                completion(Result.error(RequestError(description: "HTTP Error: \(httpResponse.statusCode)")))
+                _ = completion(nil, RequestError(description: "HTTP Error: \(httpResponse.statusCode)"))
                 return
             }
             
             guard let result = self.modelFromData(data: mydata) else {
-                completion(Result.error(RequestError(description: "sdfsdf")))
+                _ = completion(nil, RequestError(description: "sdfsdf"))
                 return
             }
             
-            completion(Result.success(result))
+            _ = completion(result, nil)
         })
         
         task.resume()
@@ -216,4 +264,54 @@ extension API : RequestPerformer {
     }()
 }
 
+class RequestChain {
+    func add(_ operation: API, completion: @escaping RequestCompletion) -> RequestChain {
+        operations.append((operation, completion))
+        return self
+    }
+    
+    func reset() {
+        operations.removeAll()
+    }
+    
+    private func nextOperation() -> OperationData? {
+        if operations.isEmpty {
+            return nil
+        }
+        
+        return operations.removeFirst()
+    }
+    
+    private func consumeOperation(op: OperationData) {
+        let completion: RequestCompletion = { [weak self] res, err in
+            print(">>>>>>>>>> Calling completion for \(op.0)")
+            let shouldContinue = op.1(res, err) // call completion
+            
+            guard let next = self?.nextOperation() else {
+                print(">>>>>>>>>> End chain")
+                return false
+            }
+            
+            print(">>>>>>>>>> (Next operation is\(next.0))")
+            self?.consumeOperation(op: next)
+            
+            return shouldContinue
+        }
+        
+        print(">>>>>>>>>> Executing \(op.0)")
+        op.0.execute(completion: completion)
+    }
+    
+    func execute() {
+        guard let next = nextOperation() else {
+            return
+        }
+        
+        print(">>>>>>>>>> Begin chain:")
+        consumeOperation(op: next)
+    }
+    
+    typealias OperationData = (API, RequestCompletion)
+    private var operations: [OperationData] = []
+}
 
