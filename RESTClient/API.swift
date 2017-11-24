@@ -184,6 +184,7 @@ struct RequestError {
 
 protocol Chainer {
     func add(_ operation: API)
+    func stop()
 }
 
 typealias RequestCompletion = (OperationResult?, RequestError?) -> Bool
@@ -268,13 +269,7 @@ extension API : RequestPerformer {
     }()
 }
 
-class RequestChain : Chainer {
-    typealias FirstCompletion = (Chainer) -> ()
-    
-    func add(_ operation: API) {
-        self.operation = operation
-    }
-    
+class RequestChain {
     func firstly(completion: @escaping FirstCompletion) -> RequestChain {
         firstCompletion = completion
         return self
@@ -285,7 +280,7 @@ class RequestChain : Chainer {
         return self
     }
     
-    func reset() {
+    private func reset() {
         completions.removeAll()
         operation = nil
         firstCompletion = { _ in }
@@ -319,5 +314,17 @@ class RequestChain : Chainer {
     private var firstCompletion: FirstCompletion = { _ in }
     private var completions: [ChainedRequestCompletion] = []
     private var operation: API?
+}
+
+extension RequestChain : Chainer {
+    typealias FirstCompletion = (Chainer) -> ()
+    
+    func add(_ operation: API) {
+        self.operation = operation
+    }
+    
+    func stop() {
+        reset()
+    }
 }
 
